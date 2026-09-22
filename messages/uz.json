@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "title": "Onlayn taklifnomalar — toʻy, nikoh, fotiha, osh",
+    "description": "Bir necha daqiqada animatsiyali onlayn taklifnoma yarating: musiqa, taymer, xarita va mehmonlar javobi bilan."
+  },
+  "nav": {
+    "home": "Bosh sahifa",
+    "login": "Kirish",
+    "dashboard": "Kabinet",
+    "logout": "Chiqish",
+    "mainNavigation": "Asosiy menyu"
+  },
+  "localeSwitcher": {
+    "label": "Til",
+    "uz": "Oʻzbekcha",
+    "ru": "Русский",
+    "en": "English"
+  },
+  "home": {
+    "title": "Toʻyingizga chiroyli onlayn taklifnoma",
+    "subtitle": "Shablonni tanlang, maʼlumotlarni kiriting va havolani mehmonlarga Telegram orqali yuboring. Kim kelishini darhol bilasiz.",
+    "ctaStart": "Boshlash",
+    "ctaDashboard": "Kabinetga oʻtish"
+  },
+  "auth": {
+    "title": "Kabinetga kirish",
+    "subtitle": "Taklifnomalaringizni yaratish va boshqarish uchun kiring.",
+    "telegramHint": "Eng tez yoʻl — Telegram orqali bir bosishda kirish.",
+    "telegramUnavailable": "Telegram orqali kirish tez orada ishga tushadi.",
+    "divider": "yoki email orqali",
+    "emailLabel": "Email manzil",
+    "emailPlaceholder": "siz@misol.uz",
+    "sendCode": "Kod yuborish",
+    "sending": "Yuborilmoqda…",
+    "codeSent": "{email} manziliga kirish kodi yuborildi. Pochtangizni tekshiring.",
+    "codeLabel": "Kod",
+    "codePlaceholder": "123456",
+    "verify": "Kirish",
+    "verifying": "Tekshirilmoqda…",
+    "changeEmail": "Boshqa email kiritish",
+    "terms": "Kirish orqali siz foydalanish shartlari va maxfiylik siyosatiga rozilik bildirasiz.",
+    "errors": {
+      "invalidEmail": "Email manzil notoʻgʻri. Masalan: siz@misol.uz",
+      "invalidCode": "Kod faqat raqamlardan iborat boʻlishi kerak (6 ta raqam).",
+      "sendFailed": "Kodni yuborib boʻlmadi. Birozdan soʻng qayta urinib koʻring.",
+      "rateLimited": "Juda koʻp urinish. Bir necha daqiqadan soʻng qayta urinib koʻring.",
+      "verifyFailed": "Kod notoʻgʻri yoki muddati oʻtgan. Yangi kod soʻrang.",
+      "telegram": "Telegram orqali kirish tasdiqlanmadi. Qaytadan urinib koʻring.",
+      "linkExpired": "Kirish havolasi eskirgan. Yangi kod soʻrang.",
+      "notConfigured": "Tizim hali toʻliq sozlanmagan. Birozdan soʻng urinib koʻring."
+    }
+  },
+  "dashboard": {
+    "title": "Kabinet",
+    "greeting": "Xush kelibsiz, {name}!",
+    "greetingAnonymous": "Xush kelibsiz!",
+    "invitationsTitle": "Mening taklifnomalarim",
+    "emptyTitle": "Hali taklifnoma yoʻq",
+    "emptyText": "Birinchi taklifnomangizni yarating — bu bir necha daqiqa oladi.",
+    "status": {
+      "draft": "Qoralama",
+      "pending_payment": "Toʻlov kutilmoqda",
+      "active": "Faol",
+      "expired": "Muddati tugagan",
+      "blocked": "Bloklangan"
+    }
+  },
+  "errors": {
+    "notFoundTitle": "Sahifa topilmadi",
+    "notFoundText": "Bu manzilda hech narsa yoʻq. Havolani tekshiring yoki bosh sahifaga qayting.",
+    "serverTitle": "Nimadir xato ketdi",
+    "serverText": "Kutilmagan xatolik yuz berdi. Sahifani qayta yuklab koʻring.",
+    "retry": "Qayta urinish",
+    "backHome": "Bosh sahifaga"
+  }
+}

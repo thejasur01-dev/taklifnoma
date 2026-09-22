@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "title": "Online invitations — weddings, nikah, fotiha, osh",
+    "description": "Create an animated online invitation in minutes: music, countdown, map and guest RSVPs."
+  },
+  "nav": {
+    "home": "Home",
+    "login": "Log in",
+    "dashboard": "Dashboard",
+    "logout": "Log out",
+    "mainNavigation": "Main navigation"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "uz": "Oʻzbekcha",
+    "ru": "Русский",
+    "en": "English"
+  },
+  "home": {
+    "title": "A beautiful online invitation for your celebration",
+    "subtitle": "Pick a template, fill in the details and send the link to guests on Telegram. See who is coming right away.",
+    "ctaStart": "Get started",
+    "ctaDashboard": "Go to dashboard"
+  },
+  "auth": {
+    "title": "Log in",
+    "subtitle": "Log in to create and manage your invitations.",
+    "telegramHint": "The fastest way is one-tap login with Telegram.",
+    "telegramUnavailable": "Telegram login is coming soon.",
+    "divider": "or with email",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "sendCode": "Send code",
+    "sending": "Sending…",
+    "codeSent": "We sent a login code to {email}. Check your inbox.",
+    "codeLabel": "Code",
+    "codePlaceholder": "123456",
+    "verify": "Log in",
+    "verifying": "Checking…",
+    "changeEmail": "Use a different email",
+    "terms": "By logging in you agree to the Terms of Use and Privacy Policy.",
+    "errors": {
+      "invalidEmail": "Invalid email. Example: you@example.com",
+      "invalidCode": "The code must contain digits only (6 digits).",
+      "sendFailed": "Could not send the code. Please try again shortly.",
+      "rateLimited": "Too many attempts. Please try again in a few minutes.",
+      "verifyFailed": "The code is wrong or expired. Request a new one.",
+      "telegram": "Telegram login could not be verified. Please try again.",
+      "linkExpired": "The login link has expired. Request a new code.",
+      "notConfigured": "The system is not fully configured yet. Please try again later."
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "greeting": "Welcome, {name}!",
+    "greetingAnonymous": "Welcome!",
+    "invitationsTitle": "My invitations",
+    "emptyTitle": "No invitations yet",
+    "emptyText": "Create your first invitation — it only takes a few minutes.",
+    "status": {
+      "draft": "Draft",
+      "pending_payment": "Awaiting payment",
+      "active": "Active",
+      "expired": "Expired",
+      "blocked": "Blocked"
+    }
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundText": "There is nothing at this address. Check the link or go back to the home page.",
+    "serverTitle": "Something went wrong",
+    "serverText": "An unexpected error occurred. Please try reloading the page.",
+    "retry": "Try again",
+    "backHome": "Back to home"
+  }
+}
