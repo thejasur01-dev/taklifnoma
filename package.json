@@ -17,7 +17,8 @@
     "db:types": "tsx scripts/gen-db-types.ts",
     "db:types:remote": "supabase gen types typescript --linked --schema public > src/types/database.ts",
     "db:push": "supabase db push",
-    "check": "npm run typecheck && npm run lint && npm run i18n:check && npm run test"
+    "check": "npm run typecheck && npm run lint && npm run i18n:check && npm run test",
+    "auth:config": "tsx scripts/push-auth-config.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

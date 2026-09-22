@@ -41,7 +41,7 @@
     "terms": "Kirish orqali siz foydalanish shartlari va maxfiylik siyosatiga rozilik bildirasiz.",
     "errors": {
       "invalidEmail": "Email manzil notoʻgʻri. Masalan: siz@misol.uz",
-      "invalidCode": "Kod faqat raqamlardan iborat boʻlishi kerak (6 ta raqam).",
+      "invalidCode": "Kod faqat raqamlardan iborat boʻlishi kerak. Xatdagi kodni toʻliq kiriting.",
       "sendFailed": "Kodni yuborib boʻlmadi. Birozdan soʻng qayta urinib koʻring.",
       "rateLimited": "Juda koʻp urinish. Bir necha daqiqadan soʻng qayta urinib koʻring.",
       "verifyFailed": "Kod notoʻgʻri yoki muddati oʻtgan. Yangi kod soʻrang.",

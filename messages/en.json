@@ -41,7 +41,7 @@
     "terms": "By logging in you agree to the Terms of Use and Privacy Policy.",
     "errors": {
       "invalidEmail": "Invalid email. Example: you@example.com",
-      "invalidCode": "The code must contain digits only (6 digits).",
+      "invalidCode": "The code must contain digits only. Enter the full code from the email.",
       "sendFailed": "Could not send the code. Please try again shortly.",
       "rateLimited": "Too many attempts. Please try again in a few minutes.",
       "verifyFailed": "The code is wrong or expired. Request a new one.",
