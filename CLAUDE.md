@@ -1,20 +1,21 @@
 @AGENTS.md
 @PROJECT_SPEC.md
 
-# Loyiha holati va qarorlar
+# Loyiha holati va qarorlar (spec'dan ustun turadi)
 
-- Bosqich: **1 — Poydevor** tugallandi (2026-09-23). Keyingisi: 2-bosqich — shablon dvigateli.
-- Next.js **16** (spec'da 15 edi; 16 — joriy barqaror). `middleware.ts` → `src/proxy.ts`, `params`/`cookies()` async.
-- next-intl: `uz` prefikssiz (`as-needed`), `ru`/`en` prefiks bilan; brauzer tilini avtomatik aniqlash **o'chirilgan** (asosiy auditoriya — o'zbek).
-- Supabase: publishable/secret kalitlar (`.env.example`). Kalitlarsiz ham ilova build bo'ladi va ishlaydi (auth "sozlanmagan" xabarini beradi).
-- Mehmonlar DB'ga to'g'ridan-to'g'ri kira olmaydi: `/i/*` o'qish va RSVP/tilak yozish faqat server (service role) orqali, rate limit + honeypot bilan.
-- To'lov bilan bog'liq ustunlar (`invitations.status/active_until/published_at`, `profiles.role`) faqat service role orqali o'zgaradi — column-level GRANT bilan himoyalangan, testlarda tekshirilgan.
-- Auth: Telegram Login Widget (`/api/auth/telegram`) + email OTP kodi (zaxira). Telefon SMS — keyinroq (Eskiz, Supabase SMS hook).
-- Docker yo'q: DB testlari va tip generatsiyasi **PGlite** orqali (`tests/db/harness.ts`).
+- **Biznes modeli (2026-09-23):** 2 ta tarif: **Mustaqil 100 000** (mijoz istalgan shablonni o'zi to'ldiradi) va **Individual 500 000** (dizayner moslab beradi). Noldan dizayn xizmati **yo'q**. Spec'dagi Oddiy/Premium/VIP tariflari bekor qilingan. Narxlar `src/lib/config.ts` → `PLAN_PRICES_UZS`.
+- **Kirish:** faqat **telefon raqam**, kod **Telegram Gateway** orqali keladi ("Verification Codes" chati). Email va Telegram widget olib tashlangan. Lokal ishlab chiqishda `AUTH_DEV_FIXED_CODE=1` bo'lsa `000000` kodi ishlaydi (production'da o'chiq).
+- **Raqobatchi:** e-invitation.uz tahlili [docs/COMPETITOR_ANALYSIS.md](docs/COMPETITOR_ANALYSIS.md). Maqsad: undan kuchliroq bo'lish (ko'proq shablon, RSVP hamma shablonda, kirishsiz jonli demo, Telegram bildirishnomalari).
+- **Dizayn tizimi:** premium-minimal. Geist shrifti, sovuq neytral ranglar va bitta aksent: **lapis ko'k `#2446a8`**. Tugmalar pill shaklida, kartalar 20px, inputlar 16px radius. Token'lar `src/app/globals.css` da. Dark mode OS sozlamasi bo'yicha. Em-dash (`—`) UI matnlarida ishlatilmaydi.
+- **Shablonlar:** `src/templates/themes.ts` (tema = palitra + shriftlar) × maket (`arch`, `frame`, `minimal`). `InvitationCover` container-query bilan istalgan o'lchamda chiziladi. Sana `cover-content.ts` orqali (Intl emas, brauzerlarda uz locale yo'q).
+- Next.js **16**: `src/proxy.ts`, `params`/`cookies()` async.
+- next-intl: `uz` prefikssiz, `ru`/`en` prefiks bilan, brauzer tilini avtomatik aniqlash o'chirilgan.
+- Mehmonlar DB'ga to'g'ridan-to'g'ri kira olmaydi (server + service role). To'lov bilan bog'liq ustunlar column-level GRANT bilan himoyalangan.
+- Supabase loyihasi: `vovfsyqwltbjbnqwsogt` (Seul). Docker yo'q: DB testlari va tiplar PGlite orqali.
 
 # Buyruqlar
 
-- `npm run check` — typecheck + lint + i18n + unit/DB testlar
-- `npm run test:e2e` — Playwright (build + start, desktop va 360px)
-- `npm run db:types` — `src/types/database.ts` ni migratsiyalardan qayta generatsiya qilish (migratsiya o'zgarganda majburiy)
-- `npm run db:push` — migratsiyalarni ulangan Supabase loyihasiga qo'llash
+- `npm run check`: typecheck, lint, i18n va unit/DB testlar
+- `npm run test:e2e`: Playwright (build, start, desktop va 360px)
+- `npm run db:types`: migratsiyalardan `src/types/database.ts` ni qayta yaratish
+- `npm run db:push`: migratsiyalarni Supabase'ga yuklash (`.env.local` ni oldin export qiling: `SUPABASE_ACCESS_TOKEN`, `SUPABASE_DB_PASSWORD`)
