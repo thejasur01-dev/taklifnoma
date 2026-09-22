@@ -236,3 +236,32 @@ describe("RLS: admins", () => {
     expect(n).toBe(1);
   });
 });
+
+describe("plans & phone auth (0002)", () => {
+  it("defaults orders to the standard plan", async () => {
+    const res = await db.query<{ plan: string }>(
+      "insert into public.orders (user_id, amount_uzs, provider) values ($1, 100000, 'manual') returning plan",
+      [alice],
+    );
+    expect(res.rows[0]!.plan).toBe("standard");
+  });
+
+  it("allows one account per phone number", async () => {
+    await db.query("update public.profiles set phone = '+998901234567' where id = $1", [alice]);
+    await expect(
+      db.query("update public.profiles set phone = '+998901234567' where id = $1", [bob]),
+    ).rejects.toThrow(/duplicate key/);
+  });
+
+  it("hides phone verifications from customers and anonymous visitors", async () => {
+    await db.query(
+      "insert into public.phone_verifications (phone, request_id) values ('+998901234567', 'r1')",
+    );
+    await expect(asAnon(db, (tx) => tx.query("select 1 from public.phone_verifications"))).rejects.toThrow(
+      /permission denied/,
+    );
+    await expect(
+      asUser(db, alice, (tx) => tx.query("select 1 from public.phone_verifications")),
+    ).rejects.toThrow(/permission denied/);
+  });
+});

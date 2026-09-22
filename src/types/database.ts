@@ -196,6 +196,7 @@ export type Database = {
           id: string;
           invitation_id: string | null;
           paid_at: string | null;
+          plan: Database["public"]["Enums"]["order_plan"];
           promo_code_id: string | null;
           provider: Database["public"]["Enums"]["payment_provider"];
           provider_tx_id: string | null;
@@ -208,6 +209,7 @@ export type Database = {
           id?: string;
           invitation_id?: string | null;
           paid_at?: string | null;
+          plan?: Database["public"]["Enums"]["order_plan"];
           promo_code_id?: string | null;
           provider: Database["public"]["Enums"]["payment_provider"];
           provider_tx_id?: string | null;
@@ -220,6 +222,7 @@ export type Database = {
           id?: string;
           invitation_id?: string | null;
           paid_at?: string | null;
+          plan?: Database["public"]["Enums"]["order_plan"];
           promo_code_id?: string | null;
           provider?: Database["public"]["Enums"]["payment_provider"];
           provider_tx_id?: string | null;
@@ -288,6 +291,33 @@ export type Database = {
             referencedColumns: ["id"];
           },
         ];
+      };
+      phone_verifications: {
+        Row: {
+          attempts: number;
+          created_at: string;
+          id: string;
+          phone: string;
+          request_id: string;
+          verified_at: string | null;
+        };
+        Insert: {
+          attempts?: number;
+          created_at?: string;
+          id?: string;
+          phone: string;
+          request_id: string;
+          verified_at?: string | null;
+        };
+        Update: {
+          attempts?: number;
+          created_at?: string;
+          id?: string;
+          phone?: string;
+          request_id?: string;
+          verified_at?: string | null;
+        };
+        Relationships: [];
       };
       profiles: {
         Row: {
@@ -481,7 +511,6 @@ export type Database = {
           sort: number;
           tags: string[];
           theme: string;
-          tier: Database["public"]["Enums"]["template_tier"];
         };
         Insert: {
           category: Database["public"]["Enums"]["event_category"];
@@ -492,12 +521,11 @@ export type Database = {
           layout: string;
           name_i18n?: Json;
           preview_url?: string | null;
-          price_uzs: number;
+          price_uzs?: number;
           slug: string;
           sort?: number;
           tags?: string[];
           theme: string;
-          tier?: Database["public"]["Enums"]["template_tier"];
         };
         Update: {
           category?: Database["public"]["Enums"]["event_category"];
@@ -513,7 +541,6 @@ export type Database = {
           sort?: number;
           tags?: string[];
           theme?: string;
-          tier?: Database["public"]["Enums"]["template_tier"];
         };
         Relationships: [];
       };
@@ -570,13 +597,13 @@ export type Database = {
       owns_invitation: { Args: { inv_id: string }; Returns: boolean };
     };
     Enums: {
-      event_category: "wedding" | "nikoh" | "fotiha" | "osh" | "birthday" | "other";
+      event_category: "wedding" | "nikoh" | "fotiha" | "osh" | "qiz_bazm" | "xatna" | "birthday" | "other";
       invitation_status: "draft" | "pending_payment" | "active" | "expired" | "blocked";
+      order_plan: "standard" | "individual";
       order_status: "pending" | "paid" | "failed" | "refunded" | "manual";
       payment_provider: "payme" | "click" | "manual";
       promo_type: "percent" | "fixed";
       rsvp_status: "yes" | "no" | "maybe";
-      template_tier: "basic" | "premium" | "vip";
       user_role: "customer" | "admin";
     };
     CompositeTypes: { [_ in never]: never };
