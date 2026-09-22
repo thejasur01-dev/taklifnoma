@@ -3,69 +3,52 @@
 import type { Messages } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { z } from "zod";
-import { getPathname, redirect } from "@/i18n/navigation";
-import { publicEnv } from "@/lib/env";
+import { redirect } from "@/i18n/navigation";
+import { normalizePhone } from "@/lib/auth/phone";
+import { requestLoginCode, verifyLoginCode } from "@/lib/auth/phone-login";
 import { createClient } from "@/lib/supabase/server";
 
 export type AuthErrorKey = keyof Messages["auth"]["errors"];
 
-export type EmailLoginState = {
-  step: "email" | "code";
-  email?: string;
+export type PhoneLoginState = {
+  step: "phone" | "code";
+  phone?: string;
   error?: AuthErrorKey;
+  retryAfterSeconds?: number;
+  /** Increments on every successful send so the client can restart its resend timer. */
+  sentCount?: number;
 };
 
-const emailSchema = z.email().max(254);
-const codeSchema = z.string().regex(/^\d{6,10}$/);
+const codeSchema = z.string().regex(/^\d{6}$/);
 
-export async function sendEmailCode(_prev: EmailLoginState, formData: FormData): Promise<EmailLoginState> {
-  const email = emailSchema.safeParse(
-    String(formData.get("email") ?? "")
-      .trim()
-      .toLowerCase(),
-  );
-  if (!email.success) return { step: "email", error: "invalidEmail" };
+export async function requestPhoneCode(prev: PhoneLoginState, formData: FormData): Promise<PhoneLoginState> {
+  const phone = normalizePhone(String(formData.get("phone") ?? ""));
+  if (!phone) return { ...prev, step: "phone", error: "invalidPhone" };
 
-  const supabase = await createClient();
-  if (!supabase) return { step: "email", email: email.data, error: "notConfigured" };
-
-  const locale = await getLocale();
-  const next = getPathname({ href: "/dashboard", locale });
-  const { error } = await supabase.auth.signInWithOtp({
-    email: email.data,
-    options: {
-      shouldCreateUser: true,
-      data: { locale },
-      emailRedirectTo: `${publicEnv.NEXT_PUBLIC_SITE_URL}/auth/confirm?next=${encodeURIComponent(next)}`,
-    },
-  });
-
-  if (error) {
-    return { step: "email", email: email.data, error: error.status === 429 ? "rateLimited" : "sendFailed" };
+  const result = await requestLoginCode(phone);
+  if (!result.ok) {
+    return {
+      ...prev,
+      step: prev.step === "code" && prev.phone === phone ? "code" : "phone",
+      phone,
+      error: result.error,
+      retryAfterSeconds: result.retryAfterSeconds,
+    };
   }
-  return { step: "code", email: email.data };
+  return { step: "code", phone, sentCount: (prev.sentCount ?? 0) + 1 };
 }
 
-export async function verifyEmailCode(_prev: EmailLoginState, formData: FormData): Promise<EmailLoginState> {
-  const email = emailSchema.safeParse(
-    String(formData.get("email") ?? "")
-      .trim()
-      .toLowerCase(),
-  );
-  if (!email.success) return { step: "email", error: "invalidEmail" };
+export async function verifyPhoneCode(prev: PhoneLoginState, formData: FormData): Promise<PhoneLoginState> {
+  const phone = normalizePhone(String(formData.get("phone") ?? ""));
+  if (!phone) return { step: "phone", error: "invalidPhone" };
 
-  const token = codeSchema.safeParse(String(formData.get("code") ?? "").replace(/\s/g, ""));
-  if (!token.success) return { step: "code", email: email.data, error: "invalidCode" };
-
-  const supabase = await createClient();
-  if (!supabase) return { step: "code", email: email.data, error: "notConfigured" };
-
-  const { error } = await supabase.auth.verifyOtp({ email: email.data, token: token.data, type: "email" });
-  if (error) {
-    return { step: "code", email: email.data, error: error.status === 429 ? "rateLimited" : "verifyFailed" };
-  }
+  const code = codeSchema.safeParse(String(formData.get("code") ?? "").replace(/\D/g, ""));
+  if (!code.success) return { ...prev, step: "code", phone, error: "invalidCode" };
 
   const locale = await getLocale();
+  const result = await verifyLoginCode(phone, code.data, locale);
+  if (!result.ok) return { ...prev, step: "code", phone, error: result.error };
+
   return redirect({ href: "/dashboard", locale });
 }
 
@@ -73,5 +56,5 @@ export async function signOut(): Promise<never> {
   const supabase = await createClient();
   await supabase?.auth.signOut();
   const locale = await getLocale();
-  return redirect({ href: "/login", locale });
+  return redirect({ href: "/", locale });
 }
