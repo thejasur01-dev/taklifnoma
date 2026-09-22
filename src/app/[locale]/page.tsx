@@ -1,33 +1,103 @@
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { FactsStrip } from "@/components/home/facts-strip";
+import { Faq } from "@/components/home/faq";
+import { Features } from "@/components/home/features";
+import { FinalCta } from "@/components/home/final-cta";
+import { Hero } from "@/components/home/hero";
+import { Pricing } from "@/components/home/pricing";
+import { Steps } from "@/components/home/steps";
+import { type ShowcaseItem, TemplatesAndDemo } from "@/components/home/templates-and-demo";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getCurrentUser } from "@/lib/auth/session";
+import { CEREMONY_TYPES, type CeremonyType } from "@/lib/config";
+import { calendarNames } from "@/templates/cover-content";
+import { SHOWCASE_TEMPLATES } from "@/templates/themes";
 
-/** Placeholder landing page — the full marketing site is built in stage 6. */
+/** Ceremonies shown as catalog filters (others are reachable later in /templates). */
+const FILTER_CEREMONIES = [
+  "wedding",
+  "nikoh",
+  "fotiha",
+  "qiz_bazm",
+  "osh",
+  "xatna",
+] as const satisfies readonly CeremonyType[];
+
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const t = await getTranslations("home");
-  const user = await getCurrentUser();
+  const [user, t, ceremony, names, demo, cal] = await Promise.all([
+    getCurrentUser(),
+    getTranslations("home"),
+    getTranslations("ceremony"),
+    getTranslations("templateNames"),
+    getTranslations("demo"),
+    getTranslations("calendar"),
+  ]);
+  // Until the constructor exists, "create" leads to login / the dashboard.
+  const ctaHref = user ? "/dashboard" : "/login";
+
+  const categoryLabels = Object.fromEntries(CEREMONY_TYPES.map((c) => [c, ceremony(c)])) as Record<
+    CeremonyType,
+    string
+  >;
+  const items: ShowcaseItem[] = SHOWCASE_TEMPLATES.map((tpl) => ({
+    slug: tpl.slug,
+    layout: tpl.layout,
+    themeId: tpl.theme,
+    name: names(tpl.theme),
+    categories: [...tpl.categories],
+  }));
 
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-center justify-center gap-6 px-4 py-16 text-center">
-        <h1 className="font-heading text-4xl leading-tight font-semibold text-balance sm:text-5xl">
-          {t("title")}
-        </h1>
-        <p className="max-w-xl text-lg text-pretty text-muted-foreground">{t("subtitle")}</p>
-        <Button asChild size="lg" className="h-12 px-6 text-base">
-          <Link href={user ? "/dashboard" : "/login"}>{user ? t("ctaDashboard") : t("ctaStart")}</Link>
-        </Button>
+      <main className="flex-1">
+        <Hero ctaHref={ctaHref} />
+        <FactsStrip />
+        <TemplatesAndDemo
+          items={items}
+          ceremonies={FILTER_CEREMONIES.map((id) => ({ id, label: categoryLabels[id] }))}
+          categoryLabels={categoryLabels}
+          cover={{
+            greeting: demo("greeting"),
+            invitation: demo("invitation"),
+            venue: demo("venue"),
+            firstName: demo("firstName"),
+            secondName: demo("secondName"),
+          }}
+          labels={{
+            templatesTitle: t("templates.title"),
+            templatesSubtitle: t("templates.subtitle"),
+            filterLabel: t("templates.filterLabel"),
+            all: t("templates.all"),
+            view: t("templates.view"),
+            empty: t("templates.empty"),
+            demoTitle: t("demo.title"),
+            demoSubtitle: t("demo.subtitle"),
+            firstName: t("demo.firstName"),
+            secondName: t("demo.secondName"),
+            date: t("demo.date"),
+            style: t("demo.style"),
+            cta: t("demo.cta"),
+            previewLabel: t("hero.previewLabel"),
+          }}
+          calendar={calendarNames(cal)}
+          ctaHref={ctaHref}
+        />
+        <Features />
+        <Steps />
+        <Pricing ctaHref={ctaHref} />
+        <Faq />
+        <FinalCta ctaHref={ctaHref} />
       </main>
+      <SiteFooter />
     </>
   );
 }

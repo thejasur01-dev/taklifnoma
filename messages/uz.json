@@ -1,14 +1,21 @@
 {
   "metadata": {
-    "title": "Onlayn taklifnomalar — toʻy, nikoh, fotiha, osh",
-    "description": "Bir necha daqiqada animatsiyali onlayn taklifnoma yarating: musiqa, taymer, xarita va mehmonlar javobi bilan."
+    "title": "Onlayn taklifnomalar: toʻy, nikoh, fotiha, osh",
+    "description": "Toʻy va marosimlar uchun animatsiyali onlayn taklifnoma. Shaxsiy mehmon havolalari, javoblar hisobi va Telegram bildirishnomalari."
   },
   "nav": {
-    "home": "Bosh sahifa",
+    "templates": "Shablonlar",
+    "features": "Imkoniyatlar",
+    "pricing": "Narxlar",
+    "faq": "Savollar",
     "login": "Kirish",
     "dashboard": "Kabinet",
     "logout": "Chiqish",
-    "mainNavigation": "Asosiy menyu"
+    "create": "Taklifnoma yaratish",
+    "menu": "Menyu",
+    "close": "Yopish",
+    "mainNavigation": "Asosiy menyu",
+    "home": "Bosh sahifa"
   },
   "localeSwitcher": {
     "label": "Til",
@@ -16,37 +23,186 @@
     "ru": "Русский",
     "en": "English"
   },
+  "demo": {
+    "greeting": "Assalomu alaykum",
+    "invitation": "Farzandlarimizning nikoh toʻyiga sizni chin qalbimizdan taklif etamiz",
+    "firstName": "Aziz",
+    "secondName": "Madina",
+    "venue": "Navroʻz saroyi, Toshkent"
+  },
   "home": {
-    "title": "Toʻyingizga chiroyli onlayn taklifnoma",
-    "subtitle": "Shablonni tanlang, maʼlumotlarni kiriting va havolani mehmonlarga Telegram orqali yuboring. Kim kelishini darhol bilasiz.",
-    "ctaStart": "Boshlash",
-    "ctaDashboard": "Kabinetga oʻtish"
+    "hero": {
+      "title": "Toʻyingizga <em>munosib</em> taklifnoma",
+      "subtitle": "Shablonni tanlang, maʼlumotlarni kiriting va havolani yuboring. Kim kelishini kabinetda darhol koʻrasiz.",
+      "secondary": "Shablonlarni koʻrish",
+      "previewLabel": "Taklifnoma namunasi"
+    },
+    "facts": {
+      "rsvp": "Javoblar har bir shablonda",
+      "guests": "Har mehmonga shaxsiy havola",
+      "telegram": "Javoblar Telegramga keladi",
+      "languages": "Oʻzbek, rus va ingliz tillarida"
+    },
+    "templates": {
+      "title": "Har bir marosimga oʻz uslubi",
+      "subtitle": "Toʻy, nikoh, fotiha, qiz bazm, osh va xatna uchun. Barcha shablonlar bir narxda.",
+      "filterLabel": "Marosim turi",
+      "all": "Barchasi",
+      "view": "Koʻrish",
+      "empty": "Bu marosim uchun shablonlar tez orada qoʻshiladi."
+    },
+    "demo": {
+      "title": "Oʻz ismlaringiz bilan sinab koʻring",
+      "subtitle": "Roʻyxatdan oʻtish shart emas. Yozishingiz bilan taklifnoma oʻzgaradi.",
+      "firstName": "Kuyov ismi",
+      "secondName": "Kelin ismi",
+      "date": "Sana va vaqt",
+      "style": "Uslub",
+      "cta": "Shu uslubda boshlash"
+    },
+    "features": {
+      "title": "Havolani yuborish bilan ish tugamaydi",
+      "guests": {
+        "title": "Har bir mehmonga shaxsiy havola",
+        "text": "Taklifnoma “Hurmatli Aziz aka” deb ochiladi. Kim ochganini ham koʻrasiz."
+      },
+      "rsvp": {
+        "title": "Kim kelishini aniq bilasiz",
+        "text": "Mehmon bir bosishda javob beradi. Kabinetda soni va izohlari jamlanadi.",
+        "sample": "Namuna",
+        "yes": "Keladi",
+        "no": "Kelolmaydi",
+        "pending": "Javob kutilmoqda"
+      },
+      "telegram": {
+        "title": "Har bir javob Telegramga",
+        "text": "Yangi javob yoki tilak kelsa, bot darhol xabar beradi."
+      },
+      "map": {
+        "title": "Xarita va kalendar",
+        "text": "Yandex yoki Google orqali yoʻl koʻrsatish, bir bosishda kalendarga qoʻshish."
+      },
+      "music": {
+        "title": "Musiqa va ochilish animatsiyasi",
+        "text": "Taklifnoma oʻzingiz tanlagan kuy bilan ochiladi."
+      },
+      "edit": {
+        "title": "Istalgan paytda tahrirlash",
+        "text": "Vaqt yoki manzil oʻzgarsa, havola oʻsha-oʻsha qoladi."
+      }
+    },
+    "steps": {
+      "title": "Taklifnoma bir necha daqiqada tayyor",
+      "choose": {
+        "title": "Tanlang",
+        "text": "Marosimingizga mos shablonni tanlang."
+      },
+      "fill": {
+        "title": "Toʻldiring",
+        "text": "Ismlar, sana, manzil, rasmlar va musiqa."
+      },
+      "send": {
+        "title": "Yuboring",
+        "text": "Havolani Telegram yoki WhatsApp orqali ulashing."
+      }
+    },
+    "pricing": {
+      "title": "Ikki tarif, yashirin toʻlovlarsiz",
+      "price": "{price, number} soʻm",
+      "note": "Toʻlov faqat nashr qilishda olinadi. Avval bepul tayyorlab koʻrasiz.",
+      "standard": {
+        "name": "Mustaqil",
+        "text": "Istalgan shablonni oʻzingiz toʻldirasiz.",
+        "f1": "Barcha shablonlar va imkoniyatlar",
+        "f2": "Cheksiz mehmon va shaxsiy havolalar",
+        "f3": "Javoblar, tilaklar va Telegram bildirishnomalari",
+        "f4": "Nashrdan keyin ham bepul tahrirlash"
+      },
+      "individual": {
+        "name": "Individual",
+        "badge": "Dizayner bilan",
+        "text": "Dizaynerimiz shablonni siz bilan birga moslaydi.",
+        "f1": "Mustaqil tarifdagi hamma narsa",
+        "f2": "Ranglar, shriftlar va bloklarni moslash",
+        "f3": "Maxsus boʻlim va matnlar",
+        "f4": "Telegramda shaxsiy menejer",
+        "cta": "Dizayner bilan bogʻlanish"
+      }
+    },
+    "faq": {
+      "title": "Koʻp beriladigan savollar",
+      "q1": "Toʻlovdan oldin taklifnomani koʻrsam boʻladimi?",
+      "a1": "Ha. Taklifnomani toʻliq tayyorlab, telefoningizda koʻrib chiqasiz. Toʻlov faqat nashr qilishda olinadi.",
+      "q2": "Mehmonlar javobini qanday bilaman?",
+      "a2": "Har bir javob kabinetda darhol koʻrinadi va Telegram bot orqali xabar keladi. Roʻyxatni Excelga yuklab olish mumkin.",
+      "q3": "Nashrdan keyin oʻzgartirsa boʻladimi?",
+      "a3": "Ha, cheklovsiz. Havola oʻzgarmaydi, mehmonlar yangilangan maʼlumotni koʻradi.",
+      "q4": "Havola qancha vaqt ishlaydi?",
+      "a4": "Marosimdan keyin yana 90 kun. Kerak boʻlsa muddatni uzaytirish mumkin.",
+      "q5": "Individual tarif qanday ishlaydi?",
+      "a5": "Shablon va istaklaringizni yozasiz, dizaynerimiz Telegram orqali bogʻlanadi va taklifnomani moslab beradi.",
+      "q6": "Qanday toʻlash mumkin?",
+      "a6": "Payme yoki Click orqali. Toʻlov tasdiqlangach taklifnoma bir necha soniyada faollashadi."
+    },
+    "cta": {
+      "title": "Taklifnomangizni bugun tayyorlang",
+      "subtitle": "Birinchi qoralama bir necha daqiqada tayyor boʻladi."
+    }
+  },
+  "footer": {
+    "tagline": "Toʻy, nikoh va oilaviy marosimlar uchun onlayn taklifnomalar.",
+    "product": "Mahsulot",
+    "help": "Yordam",
+    "rights": "© {year} {brand}"
+  },
+  "ceremony": {
+    "wedding": "Toʻy",
+    "nikoh": "Nikoh",
+    "fotiha": "Fotiha",
+    "osh": "Osh",
+    "qiz_bazm": "Qiz bazm",
+    "xatna": "Xatna",
+    "birthday": "Tugʻilgan kun",
+    "other": "Boshqa"
+  },
+  "templateNames": {
+    "lojuvard": "Lojuvard",
+    "oq-atlas": "Oq atlas",
+    "anor": "Anor",
+    "zumrad-tun": "Zumrad tun",
+    "kumush": "Kumush",
+    "lola": "Lola",
+    "tungi-osmon": "Tungi osmon",
+    "sahro": "Sahro"
   },
   "auth": {
     "title": "Kabinetga kirish",
-    "subtitle": "Taklifnomalaringizni yaratish va boshqarish uchun kiring.",
-    "telegramHint": "Eng tez yoʻl — Telegram orqali bir bosishda kirish.",
-    "telegramUnavailable": "Telegram orqali kirish tez orada ishga tushadi.",
-    "divider": "yoki email orqali",
-    "emailLabel": "Email manzil",
-    "emailPlaceholder": "siz@misol.uz",
-    "sendCode": "Kod yuborish",
+    "subtitle": "Telefon raqamingizni kiriting. Tasdiqlash kodi Telegram orqali keladi.",
+    "phoneLabel": "Telefon raqam",
+    "phoneHint": "Kod shu raqamga ulangan Telegram hisobidagi “Verification Codes” chatiga keladi.",
+    "sendCode": "Kod olish",
     "sending": "Yuborilmoqda…",
-    "codeSent": "{email} manziliga kirish kodi yuborildi. Pochtangizni tekshiring.",
-    "codeLabel": "Kod",
-    "codePlaceholder": "123456",
+    "codeSent": "{phone} raqamiga ulangan Telegramga kod yubordik.",
+    "codeLabel": "Tasdiqlash kodi",
     "verify": "Kirish",
     "verifying": "Tekshirilmoqda…",
-    "changeEmail": "Boshqa email kiritish",
+    "changePhone": "Raqamni oʻzgartirish",
+    "resend": "Kodni qayta yuborish",
+    "resendIn": "Qayta yuborish: {seconds} s",
+    "devHint": "Test rejimi: kod 000000",
     "terms": "Kirish orqali siz foydalanish shartlari va maxfiylik siyosatiga rozilik bildirasiz.",
+    "asideTitle": "Mehmonlaringiz javobi bir joyda",
+    "asideText": "Taklifnomalar, mehmonlar roʻyxati va javoblar kabinetingizda saqlanadi.",
     "errors": {
-      "invalidEmail": "Email manzil notoʻgʻri. Masalan: siz@misol.uz",
-      "invalidCode": "Kod faqat raqamlardan iborat boʻlishi kerak. Xatdagi kodni toʻliq kiriting.",
-      "sendFailed": "Kodni yuborib boʻlmadi. Birozdan soʻng qayta urinib koʻring.",
-      "rateLimited": "Juda koʻp urinish. Bir necha daqiqadan soʻng qayta urinib koʻring.",
-      "verifyFailed": "Kod notoʻgʻri yoki muddati oʻtgan. Yangi kod soʻrang.",
-      "telegram": "Telegram orqali kirish tasdiqlanmadi. Qaytadan urinib koʻring.",
-      "linkExpired": "Kirish havolasi eskirgan. Yangi kod soʻrang.",
+      "invalidPhone": "Telefon raqam notoʻgʻri. Masalan: +998 90 123 45 67",
+      "invalidCode": "Kod 6 ta raqamdan iborat.",
+      "wrongCode": "Kod notoʻgʻri. Telegramdagi kodni qayta tekshiring.",
+      "telegramUnavailable": "Bu raqamga Telegram hisobi ulanmagan. Telegramdagi raqamingizni kiriting.",
+      "sendFailed": "Kodni yuborib boʻlmadi. Birozdan soʻng urinib koʻring.",
+      "rateLimited": "Juda koʻp urinish. Birozdan soʻng qayta urinib koʻring.",
+      "codeExpired": "Kod muddati tugadi. Yangi kod oling.",
+      "tooManyAttempts": "Urinishlar soni tugadi. Yangi kod oling.",
+      "verifyFailed": "Kirishda xatolik yuz berdi. Qaytadan urinib koʻring.",
       "notConfigured": "Tizim hali toʻliq sozlanmagan. Birozdan soʻng urinib koʻring."
     }
   },
@@ -56,7 +212,7 @@
     "greetingAnonymous": "Xush kelibsiz!",
     "invitationsTitle": "Mening taklifnomalarim",
     "emptyTitle": "Hali taklifnoma yoʻq",
-    "emptyText": "Birinchi taklifnomangizni yarating — bu bir necha daqiqa oladi.",
+    "emptyText": "Birinchi taklifnomangizni yarating. Bu bir necha daqiqa oladi.",
     "status": {
       "draft": "Qoralama",
       "pending_payment": "Toʻlov kutilmoqda",
@@ -72,5 +228,30 @@
     "serverText": "Kutilmagan xatolik yuz berdi. Sahifani qayta yuklab koʻring.",
     "retry": "Qayta urinish",
     "backHome": "Bosh sahifaga"
+  },
+  "calendar": {
+    "weekday": {
+      "sun": "yakshanba",
+      "mon": "dushanba",
+      "tue": "seshanba",
+      "wed": "chorshanba",
+      "thu": "payshanba",
+      "fri": "juma",
+      "sat": "shanba"
+    },
+    "month": {
+      "jan": "yanvar",
+      "feb": "fevral",
+      "mar": "mart",
+      "apr": "aprel",
+      "may": "may",
+      "jun": "iyun",
+      "jul": "iyul",
+      "aug": "avgust",
+      "sep": "sentabr",
+      "oct": "oktabr",
+      "nov": "noyabr",
+      "dec": "dekabr"
+    }
   }
 }

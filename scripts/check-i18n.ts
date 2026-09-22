@@ -15,7 +15,15 @@ type Messages = { [key: string]: string | Messages };
 const PRIMARY = "uz";
 const LOCALES = ["uz", "ru", "en"] as const;
 /** Keys whose value is legitimately the same in every language. */
-const ALLOW_IDENTICAL = [/^localeSwitcher\.(uz|ru|en)$/, /\.codePlaceholder$/];
+const ALLOW_IDENTICAL = [
+  /^localeSwitcher.(uz|ru|en)$/,
+  /.codePlaceholder$/,
+  // Proper names and Uzbek ceremony names are written the same in Latin-script locales.
+  /^demo.(firstName|secondName)$/,
+  /^ceremony.(fotiha|osh|qiz_bazm)$/,
+  /^home.pricing.individual.name$/,
+  /^footer.rights$/,
+];
 
 function flatten(obj: Messages, prefix = ""): Map<string, string> {
   const out = new Map<string, string>();

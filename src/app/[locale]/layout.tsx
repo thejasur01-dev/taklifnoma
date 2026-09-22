@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { routing } from "@/i18n/routing";
 import { BRAND } from "@/lib/config";
 import { publicEnv } from "@/lib/env";
-import { fontHeading, fontSans } from "../fonts";
+import { fontVariables } from "../fonts";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 
   return {
     metadataBase: new URL(publicEnv.NEXT_PUBLIC_SITE_URL),
-    title: { default: `${BRAND.name} — ${t("title")}`, template: `%s · ${BRAND.name}` },
+    title: { default: `${BRAND.name} | ${t("title")}`, template: `%s | ${BRAND.name}` },
     description: t("description"),
   };
 }
@@ -37,7 +37,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className={`${fontSans.variable} ${fontHeading.variable} h-full antialiased`}>
+    <html lang={locale} className={`${fontVariables} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
           {children}

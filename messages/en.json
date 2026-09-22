@@ -1,14 +1,21 @@
 {
   "metadata": {
-    "title": "Online invitations — weddings, nikah, fotiha, osh",
-    "description": "Create an animated online invitation in minutes: music, countdown, map and guest RSVPs."
+    "title": "Online invitations for weddings, nikah, fotiha and osh",
+    "description": "Animated online invitations for weddings and celebrations. Personal guest links, RSVP tracking and Telegram notifications."
   },
   "nav": {
-    "home": "Home",
+    "templates": "Templates",
+    "features": "Features",
+    "pricing": "Pricing",
+    "faq": "FAQ",
     "login": "Log in",
     "dashboard": "Dashboard",
     "logout": "Log out",
-    "mainNavigation": "Main navigation"
+    "create": "Create invitation",
+    "menu": "Menu",
+    "close": "Close",
+    "mainNavigation": "Main navigation",
+    "home": "Home"
   },
   "localeSwitcher": {
     "label": "Language",
@@ -16,37 +23,186 @@
     "ru": "Русский",
     "en": "English"
   },
+  "demo": {
+    "greeting": "Assalamu alaikum",
+    "invitation": "With joy we invite you to the wedding of our children",
+    "firstName": "Aziz",
+    "secondName": "Madina",
+    "venue": "Navruz Palace, Tashkent"
+  },
   "home": {
-    "title": "A beautiful online invitation for your celebration",
-    "subtitle": "Pick a template, fill in the details and send the link to guests on Telegram. See who is coming right away.",
-    "ctaStart": "Get started",
-    "ctaDashboard": "Go to dashboard"
+    "hero": {
+      "title": "An invitation <em>worthy</em> of your wedding",
+      "subtitle": "Pick a template, fill in the details and send the link. See who is coming in your dashboard right away.",
+      "secondary": "Browse templates",
+      "previewLabel": "Sample invitation"
+    },
+    "facts": {
+      "rsvp": "RSVP in every template",
+      "guests": "A personal link for every guest",
+      "telegram": "Replies arrive in Telegram",
+      "languages": "In Uzbek, Russian and English"
+    },
+    "templates": {
+      "title": "A style for every celebration",
+      "subtitle": "For weddings, nikah, fotiha, qiz bazm, osh and khatna. Every template has the same price.",
+      "filterLabel": "Celebration type",
+      "all": "All",
+      "view": "View",
+      "empty": "Templates for this celebration are coming soon."
+    },
+    "demo": {
+      "title": "Try it with your own names",
+      "subtitle": "No sign-up needed. The invitation changes as you type.",
+      "firstName": "Groom's name",
+      "secondName": "Bride's name",
+      "date": "Date and time",
+      "style": "Style",
+      "cta": "Start with this style"
+    },
+    "features": {
+      "title": "Sending the link is only the beginning",
+      "guests": {
+        "title": "A personal link for every guest",
+        "text": "The invitation opens with “Dear Aziz aka”. You also see who opened it."
+      },
+      "rsvp": {
+        "title": "Know exactly who is coming",
+        "text": "Guests reply in one tap. Headcount and comments collect in your dashboard.",
+        "sample": "Example",
+        "yes": "Attending",
+        "no": "Can't make it",
+        "pending": "Awaiting reply"
+      },
+      "telegram": {
+        "title": "Every reply in Telegram",
+        "text": "The bot notifies you as soon as a reply or a wish arrives."
+      },
+      "map": {
+        "title": "Map and calendar",
+        "text": "Directions via Yandex or Google, add to calendar in one tap."
+      },
+      "music": {
+        "title": "Music and opening animation",
+        "text": "The invitation opens with a tune you choose."
+      },
+      "edit": {
+        "title": "Edit any time",
+        "text": "If the time or venue changes, the link stays the same."
+      }
+    },
+    "steps": {
+      "title": "Ready in a few minutes",
+      "choose": {
+        "title": "Choose",
+        "text": "A template that fits your celebration."
+      },
+      "fill": {
+        "title": "Fill in",
+        "text": "Names, date, venue, photos and music."
+      },
+      "send": {
+        "title": "Send",
+        "text": "Share the link on Telegram or WhatsApp."
+      }
+    },
+    "pricing": {
+      "title": "Two plans, no hidden fees",
+      "price": "{price, number} UZS",
+      "note": "You pay only when you publish. Prepare and preview your invitation for free first.",
+      "standard": {
+        "name": "Self-service",
+        "text": "You fill in any template yourself.",
+        "f1": "All templates and features",
+        "f2": "Unlimited guests and personal links",
+        "f3": "RSVPs, wishes and Telegram notifications",
+        "f4": "Free edits after publishing"
+      },
+      "individual": {
+        "name": "Individual",
+        "badge": "With a designer",
+        "text": "Our designer customises the template together with you.",
+        "f1": "Everything in Self-service",
+        "f2": "Custom colors, fonts and blocks",
+        "f3": "Special sections and texts",
+        "f4": "A personal manager on Telegram",
+        "cta": "Contact a designer"
+      }
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "q1": "Can I see the invitation before paying?",
+      "a1": "Yes. You fully prepare the invitation and preview it on your phone. You pay only when you publish.",
+      "q2": "How do I see guests' replies?",
+      "a2": "Every reply appears in your dashboard instantly and the Telegram bot notifies you. You can export the list to Excel.",
+      "q3": "Can I change it after publishing?",
+      "a3": "Yes, without limits. The link stays the same and guests see the updated details.",
+      "q4": "How long does the link work?",
+      "a4": "For 90 more days after the celebration. The period can be extended if needed.",
+      "q5": "How does the Individual plan work?",
+      "a5": "You describe the template and your wishes, our designer contacts you on Telegram and customises the invitation.",
+      "q6": "How can I pay?",
+      "a6": "With Payme or Click. Once the payment is confirmed, the invitation goes live within seconds."
+    },
+    "cta": {
+      "title": "Prepare your invitation today",
+      "subtitle": "Your first draft is ready in a few minutes."
+    }
+  },
+  "footer": {
+    "tagline": "Online invitations for weddings, nikah and family celebrations.",
+    "product": "Product",
+    "help": "Help",
+    "rights": "© {year} {brand}"
+  },
+  "ceremony": {
+    "wedding": "Wedding",
+    "nikoh": "Nikah",
+    "fotiha": "Fotiha",
+    "osh": "Osh",
+    "qiz_bazm": "Qiz bazm",
+    "xatna": "Khatna",
+    "birthday": "Birthday",
+    "other": "Other"
+  },
+  "templateNames": {
+    "lojuvard": "Lapis",
+    "oq-atlas": "White Satin",
+    "anor": "Pomegranate",
+    "zumrad-tun": "Emerald Night",
+    "kumush": "Silver",
+    "lola": "Tulip",
+    "tungi-osmon": "Night Sky",
+    "sahro": "Desert"
   },
   "auth": {
     "title": "Log in",
-    "subtitle": "Log in to create and manage your invitations.",
-    "telegramHint": "The fastest way is one-tap login with Telegram.",
-    "telegramUnavailable": "Telegram login is coming soon.",
-    "divider": "or with email",
-    "emailLabel": "Email",
-    "emailPlaceholder": "you@example.com",
-    "sendCode": "Send code",
+    "subtitle": "Enter your phone number. The confirmation code arrives in Telegram.",
+    "phoneLabel": "Phone number",
+    "phoneHint": "The code arrives in the “Verification Codes” chat of the Telegram account linked to this number.",
+    "sendCode": "Get code",
     "sending": "Sending…",
-    "codeSent": "We sent a login code to {email}. Check your inbox.",
-    "codeLabel": "Code",
-    "codePlaceholder": "123456",
+    "codeSent": "We sent a code to the Telegram linked to {phone}.",
+    "codeLabel": "Confirmation code",
     "verify": "Log in",
     "verifying": "Checking…",
-    "changeEmail": "Use a different email",
+    "changePhone": "Change number",
+    "resend": "Send code again",
+    "resendIn": "Resend in {seconds} s",
+    "devHint": "Test mode: code 000000",
     "terms": "By logging in you agree to the Terms of Use and Privacy Policy.",
+    "asideTitle": "All guest replies in one place",
+    "asideText": "Your invitations, guest list and replies are stored in your dashboard.",
     "errors": {
-      "invalidEmail": "Invalid email. Example: you@example.com",
-      "invalidCode": "The code must contain digits only. Enter the full code from the email.",
+      "invalidPhone": "Invalid number. Example: +998 90 123 45 67",
+      "invalidCode": "The code has 6 digits.",
+      "wrongCode": "Wrong code. Check the code in Telegram.",
+      "telegramUnavailable": "No Telegram account is linked to this number. Enter your Telegram number.",
       "sendFailed": "Could not send the code. Please try again shortly.",
-      "rateLimited": "Too many attempts. Please try again in a few minutes.",
-      "verifyFailed": "The code is wrong or expired. Request a new one.",
-      "telegram": "Telegram login could not be verified. Please try again.",
-      "linkExpired": "The login link has expired. Request a new code.",
+      "rateLimited": "Too many attempts. Please try again shortly.",
+      "codeExpired": "The code has expired. Get a new one.",
+      "tooManyAttempts": "No attempts left. Get a new code.",
+      "verifyFailed": "Could not log in. Please try again.",
       "notConfigured": "The system is not fully configured yet. Please try again later."
     }
   },
@@ -56,7 +212,7 @@
     "greetingAnonymous": "Welcome!",
     "invitationsTitle": "My invitations",
     "emptyTitle": "No invitations yet",
-    "emptyText": "Create your first invitation — it only takes a few minutes.",
+    "emptyText": "Create your first invitation. It only takes a few minutes.",
     "status": {
       "draft": "Draft",
       "pending_payment": "Awaiting payment",
@@ -72,5 +228,30 @@
     "serverText": "An unexpected error occurred. Please try reloading the page.",
     "retry": "Try again",
     "backHome": "Back to home"
+  },
+  "calendar": {
+    "weekday": {
+      "sun": "Sunday",
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday"
+    },
+    "month": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    }
   }
 }

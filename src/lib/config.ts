@@ -7,17 +7,30 @@ export const BRAND = {
   domain: "taklifnoma.uz",
 } as const;
 
-/** How many days an invitation link stays active after the main event (§11). */
+/** How many days an invitation link stays active after the main event. */
 export const LINK_ACTIVE_DAYS_AFTER_EVENT = 90;
 
-export const TIERS = ["basic", "premium", "vip"] as const;
-export type Tier = (typeof TIERS)[number];
+/**
+ * Two plans (decision 2026-09-23):
+ *  - standard: the customer fills any ready-made template in the constructor;
+ *  - individual: a staff member customises the design together with the customer.
+ */
+export const PLANS = ["standard", "individual"] as const;
+export type Plan = (typeof PLANS)[number];
 
-/** Starting prices in UZS (§11). The DB `templates.price_uzs` is the source of truth per template. */
-export const TIER_PRICES_UZS: Record<Tier, number> = {
-  basic: 99_000,
-  premium: 149_000,
-  vip: 249_000,
+export const PLAN_PRICES_UZS: Record<Plan, number> = {
+  standard: 100_000,
+  individual: 500_000,
 };
 
-export const POPULAR_TIER: Tier = "premium";
+export const CEREMONY_TYPES = [
+  "wedding",
+  "nikoh",
+  "fotiha",
+  "osh",
+  "qiz_bazm",
+  "xatna",
+  "birthday",
+  "other",
+] as const;
+export type CeremonyType = (typeof CEREMONY_TYPES)[number];
