@@ -48,3 +48,24 @@ npm run check
 npm run test:e2e
 npm run build
 ```
+
+## 5. Vercel'ga joylash
+
+1. https://vercel.com → **Add New… → Project** → GitHub'dagi `taklifnoma` repozitoriyasini tanlang (**Import**).
+2. Framework avtomatik aniqlanadi (Next.js), build sozlamalariga tegmang.
+3. **Environment Variables** bo'limiga `.env.local` dagi qiymatlarni qo'shing:
+
+   | O'zgaruvchi                            | Qiymat                                                               |
+   | -------------------------------------- | -------------------------------------------------------------------- |
+   | `NEXT_PUBLIC_SITE_URL`                 | Vercel bergan manzil, masalan `https://taklifnoma.vercel.app`        |
+   | `NEXT_PUBLIC_SUPABASE_URL`             | `.env.local` dagidek                                                 |
+   | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | `.env.local` dagidek                                                 |
+   | `SUPABASE_SECRET_KEY`                  | `.env.local` dagidek                                                 |
+   | `TELEGRAM_GATEWAY_TOKEN`               | `.env.local` dagidek                                                 |
+   | `ALLOW_FREE_PUBLISH`                   | `1` — to'lov ulanguncha sinov uchun; ishga tushirishda olib tashlang |
+
+   `SUPABASE_ACCESS_TOKEN`, `SUPABASE_DB_PASSWORD` va `AUTH_DEV_FIXED_CODE` Vercel'ga **kerak emas**.
+
+4. **Deploy** ni bosing. Birinchi deploydan keyin `NEXT_PUBLIC_SITE_URL` ni aniq manzilga to'g'rilab, **Redeploy** qiling.
+5. Funksiyalar Supabase bilan bir joyda, Seul regionida ishlaydi (`vercel.json` → `icn1`).
+6. Keyingi har bir `git push` avtomatik deploy qilinadi.

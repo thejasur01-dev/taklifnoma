@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import { requireUser } from "@/lib/auth/session";
 import { PLAN_PRICES_UZS } from "@/lib/config";
 import { publicEnv } from "@/lib/env";
+import { isFreePublishAllowed } from "@/lib/server-env";
 import { createClient } from "@/lib/supabase/server";
 import { getCatalogTemplate } from "@/templates/catalog";
 import { calendarNames } from "@/templates/cover-content";
@@ -57,7 +58,7 @@ export default async function EditInvitationPage({ params }: PageProps<"/[locale
           initialSlug={invitation.slug}
           status={invitation.status}
           siteUrl={publicEnv.NEXT_PUBLIC_SITE_URL}
-          devMode={process.env.NODE_ENV !== "production"}
+          devMode={isFreePublishAllowed()}
           calendar={calendarNames(cal)}
           priceLabel={editor("price", { price: PLAN_PRICES_UZS.standard })}
         />

@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/auth/session";
 import { LINK_ACTIVE_DAYS_AFTER_EVENT } from "@/lib/config";
+import { isFreePublishAllowed } from "@/lib/server-env";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { DEMO_STARTS_AT, getCatalogTemplate } from "@/templates/catalog";
@@ -110,11 +111,12 @@ export async function saveInvitation(input: z.input<typeof saveSchema>): Promise
 }
 
 /**
- * Publishes an invitation without payment. Available only outside production
- * until Payme/Click are integrated (stage 5).
+ * Publishes an invitation without payment. Allowed only when
+ * isFreePublishAllowed() (development, or ALLOW_FREE_PUBLISH=1) until
+ * Payme/Click are integrated (stage 5).
  */
 export async function activateForTesting(id: string): Promise<{ ok: boolean }> {
-  if (process.env.NODE_ENV === "production") return { ok: false };
+  if (!isFreePublishAllowed()) return { ok: false };
 
   const supabase = await createClient();
   const admin = createAdminClient();
