@@ -21,3 +21,10 @@ insert into public.templates (slug, layout, theme, name_i18n, category, tags, pr
     '{"uz": "Konvert · Fil suyagi", "ru": "Конверт · Слоновая кость", "en": "Envelope · Ivory Minimal"}',
     'birthday', '{minimal,envelope,light}', 100000, false, 60)
 on conflict (slug) do nothing;
+
+-- First media template: floral gate with video intro (assets in /public/templates/gulli-darvoza).
+insert into public.templates (slug, layout, theme, name_i18n, category, tags, price_uzs, is_new, sort) values
+  ('gulli-darvoza', 'gate-video', 'gulli-darvoza',
+    '{"uz": "Gulli darvoza", "ru": "Цветочные врата", "en": "Floral Gate"}',
+    'wedding', '{floral,gold,video,premium}', 100000, true, 0)
+on conflict (slug) do nothing;

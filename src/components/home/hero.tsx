@@ -5,6 +5,7 @@ import { PhoneFrame } from "@/components/phone-frame";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { buildCoverContent, calendarNames, DEMO_EVENT_DATE } from "@/templates/cover-content";
+import { GulliDarvozaIntroPreview } from "@/templates/gulli-darvoza/intro-preview";
 import { InvitationCover } from "@/templates/invitation-cover";
 import { getTheme } from "@/templates/themes";
 
@@ -13,6 +14,8 @@ export async function Hero({ ctaHref }: { ctaHref: string }) {
   const nav = await getTranslations("nav");
   const demo = await getTranslations("demo");
   const calendar = calendarNames(await getTranslations("calendar"));
+  const featured = await getTranslations("demoInvitation");
+  const invitation = await getTranslations("invitation");
 
   const content = buildCoverContent(
     { greeting: demo("greeting"), invitation: demo("invitation"), venue: demo("venue") },
@@ -61,11 +64,22 @@ export async function Hero({ ctaHref }: { ctaHref: string }) {
         >
           <InvitationCover theme={getTheme("anor")} layout="frame" content={content} />
         </div>
-        <div className="relative mx-auto w-[64%] max-w-[300px] py-6 sm:w-[54%]">
-          <PhoneFrame label={t("previewLabel")}>
-            <InvitationCover theme={getTheme("lojuvard")} layout="arch" content={content} />
+        <Link
+          href="/templates/gulli-darvoza"
+          className="group relative mx-auto block w-[64%] max-w-[300px] rounded-[2.6rem] py-6 sm:w-[54%]"
+        >
+          <PhoneFrame
+            label={t("previewLabel")}
+            className="transition-transform duration-700 ease-out-soft group-hover:-translate-y-1.5"
+          >
+            <GulliDarvozaIntroPreview
+              first={featured("first")}
+              second={featured("second")}
+              openLabel={invitation("open")}
+              priority
+            />
           </PhoneFrame>
-        </div>
+        </Link>
       </Reveal>
     </section>
   );

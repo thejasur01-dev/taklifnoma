@@ -44,10 +44,14 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
 export function formatCoverDate(date: Date, names: CalendarNames) {
   const local = new Date(date.getTime() + TASHKENT_OFFSET_MS);
+  const month = names.months[local.getUTCMonth()] ?? "";
+  const year = String(local.getUTCFullYear());
   return {
     weekday: names.weekdays[local.getUTCDay()] ?? "",
     day: String(local.getUTCDate()),
-    monthYear: `${names.months[local.getUTCMonth()] ?? ""} ${local.getUTCFullYear()}`,
+    month,
+    year,
+    monthYear: `${month} ${year}`,
     time: `${pad(local.getUTCHours())}:${pad(local.getUTCMinutes())}`,
   };
 }
@@ -60,7 +64,8 @@ export function buildCoverContent(
   date: Date,
   calendar: CalendarNames,
 ): InvitationCoverContent {
-  return { ...texts, firstName: names.first, secondName: names.second, ...formatCoverDate(date, calendar) };
+  const { weekday, day, monthYear, time } = formatCoverDate(date, calendar);
+  return { ...texts, firstName: names.first, secondName: names.second, weekday, day, monthYear, time };
 }
 
 /** Sample event date used by marketing previews. */

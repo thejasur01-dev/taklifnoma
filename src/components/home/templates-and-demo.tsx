@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, Eye } from "lucide-react";
+import { ArrowRight, Eye, Play } from "lucide-react";
+import Image from "next/image";
 import { useId, useMemo, useRef, useState } from "react";
 import { Reveal } from "@/components/motion/reveal";
 import { PhoneFrame } from "@/components/phone-frame";
@@ -14,13 +15,26 @@ import { buildCoverContent, type CalendarNames, DEMO_EVENT_DATE } from "@/templa
 import { InvitationCover } from "@/templates/invitation-cover";
 import { getTheme, type LayoutId } from "@/templates/themes";
 
-export type ShowcaseItem = {
+type CoverItem = {
+  kind: "cover";
   slug: string;
   layout: LayoutId;
   themeId: string;
   name: string;
   categories: CeremonyType[];
 };
+
+/** A full template with its own preview page (real artwork, optional video intro). */
+type MediaItem = {
+  kind: "media";
+  slug: string;
+  name: string;
+  categories: CeremonyType[];
+  thumbnail: string;
+  hasVideo: boolean;
+};
+
+export type ShowcaseItem = CoverItem | MediaItem;
 
 type Labels = {
   templatesTitle: string;
@@ -37,6 +51,7 @@ type Labels = {
   style: string;
   cta: string;
   previewLabel: string;
+  video: string;
 };
 
 type Props = {
@@ -70,13 +85,14 @@ export function TemplatesAndDemo({
   const demoRef = useRef<HTMLElement>(null);
 
   const [filter, setFilter] = useState<CeremonyType | "all">("all");
-  const [selected, setSelected] = useState(items[0]?.slug ?? "");
+  const coverItems = items.filter((i): i is CoverItem => i.kind === "cover");
+  const [selected, setSelected] = useState(coverItems[0]?.slug ?? "");
   const [firstName, setFirstName] = useState(cover.firstName);
   const [secondName, setSecondName] = useState(cover.secondName);
   const [dateValue, setDateValue] = useState(DEMO_LOCAL_VALUE);
 
   const visible = filter === "all" ? items : items.filter((i) => i.categories.includes(filter));
-  const current = items.find((i) => i.slug === selected) ?? items[0];
+  const current = coverItems.find((i) => i.slug === selected) ?? coverItems[0];
 
   const sampleContent = useMemo(
     () =>
@@ -145,38 +161,79 @@ export function TemplatesAndDemo({
           <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-4">
             {visible.map((item) => (
               <li key={item.slug}>
-                <button
-                  type="button"
-                  onClick={() => openInDemo(item.slug)}
-                  aria-label={`${item.name}. ${labels.view}`}
-                  className="group block w-full rounded-lg text-left"
-                >
-                  <div
-                    aria-hidden="true"
-                    className="overflow-hidden rounded-lg shadow-[0_1px_2px_rgb(18_20_26/0.06),0_18px_40px_-28px_rgb(18_20_26/0.35)] ring-1 ring-foreground/5 transition-transform duration-500 ease-out-soft group-hover:-translate-y-1"
+                {item.kind === "media" ? (
+                  <Link
+                    href={`/templates/${item.slug}`}
+                    aria-label={`${item.name}. ${labels.view}`}
+                    className="group block rounded-lg"
                   >
-                    <InvitationCover
-                      theme={getTheme(item.themeId)}
-                      layout={item.layout}
-                      content={sampleContent}
-                    />
-                  </div>
-                  <div className="mt-4 flex items-start justify-between gap-3">
-                    <div>
-                      <p className="font-medium">{item.name}</p>
-                      <p className="mt-0.5 text-sm text-muted-foreground">
-                        {item.categories.map((c) => categoryLabels[c]).join(", ")}
-                      </p>
-                    </div>
-                    <span
+                    <div
                       aria-hidden="true"
-                      className="mt-0.5 inline-flex items-center gap-1.5 text-sm text-primary opacity-80 transition-opacity group-hover:opacity-100"
+                      className="relative aspect-[9/16] overflow-hidden rounded-lg shadow-[0_1px_2px_rgb(18_20_26/0.06),0_18px_40px_-28px_rgb(18_20_26/0.35)] ring-1 ring-foreground/5 transition-transform duration-500 ease-out-soft group-hover:-translate-y-1"
                     >
-                      <Eye aria-hidden="true" className="size-4" strokeWidth={1.5} />
-                      {labels.view}
-                    </span>
-                  </div>
-                </button>
+                      <Image
+                        src={item.thumbnail}
+                        alt=""
+                        fill
+                        sizes="(max-width: 1024px) 50vw, 25vw"
+                        className="object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <div aria-hidden="true" className="mt-4 flex items-start justify-between gap-3">
+                      <div>
+                        <p className="flex items-center gap-2 font-medium">
+                          {item.name}
+                          {item.hasVideo ? (
+                            <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-[11px] font-medium text-accent-foreground">
+                              <Play className="size-3" strokeWidth={2} />
+                              {labels.video}
+                            </span>
+                          ) : null}
+                        </p>
+                        <p className="mt-0.5 text-sm text-muted-foreground">
+                          {item.categories.map((c) => categoryLabels[c]).join(", ")}
+                        </p>
+                      </div>
+                      <span className="mt-0.5 inline-flex items-center gap-1.5 text-sm text-primary opacity-80 transition-opacity group-hover:opacity-100">
+                        <Eye className="size-4" strokeWidth={1.5} />
+                        {labels.view}
+                      </span>
+                    </div>
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => openInDemo(item.slug)}
+                    aria-label={`${item.name}. ${labels.view}`}
+                    className="group block w-full rounded-lg text-left"
+                  >
+                    <div
+                      aria-hidden="true"
+                      className="overflow-hidden rounded-lg shadow-[0_1px_2px_rgb(18_20_26/0.06),0_18px_40px_-28px_rgb(18_20_26/0.35)] ring-1 ring-foreground/5 transition-transform duration-500 ease-out-soft group-hover:-translate-y-1"
+                    >
+                      <InvitationCover
+                        theme={getTheme(item.themeId)}
+                        layout={item.layout}
+                        content={sampleContent}
+                      />
+                    </div>
+                    <div className="mt-4 flex items-start justify-between gap-3">
+                      <div>
+                        <p className="font-medium">{item.name}</p>
+                        <p className="mt-0.5 text-sm text-muted-foreground">
+                          {item.categories.map((c) => categoryLabels[c]).join(", ")}
+                        </p>
+                      </div>
+                      <span
+                        aria-hidden="true"
+                        className="mt-0.5 inline-flex items-center gap-1.5 text-sm text-primary opacity-80 transition-opacity group-hover:opacity-100"
+                      >
+                        <Eye aria-hidden="true" className="size-4" strokeWidth={1.5} />
+                        {labels.view}
+                      </span>
+                    </div>
+                  </button>
+                )}
               </li>
             ))}
           </ul>
@@ -236,7 +293,7 @@ export function TemplatesAndDemo({
             <fieldset className="mt-7">
               <legend className="text-sm font-medium">{labels.style}</legend>
               <div className="mt-3 flex flex-wrap gap-2.5">
-                {items.map((item) => {
+                {coverItems.map((item) => {
                   const theme = getTheme(item.themeId);
                   const active = item.slug === current?.slug;
                   return (

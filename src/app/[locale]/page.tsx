@@ -15,6 +15,7 @@ import { routing } from "@/i18n/routing";
 import { getCurrentUser } from "@/lib/auth/session";
 import { CEREMONY_TYPES, type CeremonyType } from "@/lib/config";
 import { calendarNames } from "@/templates/cover-content";
+import { MEDIA_TEMPLATES } from "@/templates/registry";
 import { SHOWCASE_TEMPLATES } from "@/templates/themes";
 
 /** Ceremonies shown as catalog filters (others are reachable later in /templates). */
@@ -32,13 +33,14 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const [user, t, ceremony, names, demo, cal] = await Promise.all([
+  const [user, t, ceremony, names, demo, cal, templatePage] = await Promise.all([
     getCurrentUser(),
     getTranslations("home"),
     getTranslations("ceremony"),
     getTranslations("templateNames"),
     getTranslations("demo"),
     getTranslations("calendar"),
+    getTranslations("templatePage"),
   ]);
   // Until the constructor exists, "create" leads to login / the dashboard.
   const ctaHref = user ? "/dashboard" : "/login";
@@ -47,13 +49,24 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     CeremonyType,
     string
   >;
-  const items: ShowcaseItem[] = SHOWCASE_TEMPLATES.map((tpl) => ({
-    slug: tpl.slug,
-    layout: tpl.layout,
-    themeId: tpl.theme,
-    name: names(tpl.theme),
-    categories: [...tpl.categories],
-  }));
+  const items: ShowcaseItem[] = [
+    ...MEDIA_TEMPLATES.map((tpl) => ({
+      kind: "media" as const,
+      slug: tpl.slug,
+      name: names(tpl.slug),
+      categories: [...tpl.categories],
+      thumbnail: tpl.thumbnail,
+      hasVideo: tpl.hasVideo,
+    })),
+    ...SHOWCASE_TEMPLATES.map((tpl) => ({
+      kind: "cover" as const,
+      slug: tpl.slug,
+      layout: tpl.layout,
+      themeId: tpl.theme,
+      name: names(tpl.theme),
+      categories: [...tpl.categories],
+    })),
+  ];
 
   return (
     <>
@@ -87,6 +100,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             style: t("demo.style"),
             cta: t("demo.cta"),
             previewLabel: t("hero.previewLabel"),
+            video: templatePage("video"),
           }}
           calendar={calendarNames(cal)}
           ctaHref={ctaHref}

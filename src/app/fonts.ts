@@ -1,4 +1,4 @@
-import { Forum, Geist, Great_Vibes, Lora, Tenor_Sans } from "next/font/google";
+import { Cormorant_Garamond, Forum, Geist, Great_Vibes, Lora, Tenor_Sans } from "next/font/google";
 
 /** Site UI and marketing typography. */
 export const fontSans = Geist({
@@ -43,6 +43,15 @@ export const fontModern = Tenor_Sans({
   preload: false,
 });
 
-export const fontVariables = [fontSans, fontScript, fontClassic, fontSerif, fontModern]
+export const fontGaramond = Cormorant_Garamond({
+  variable: "--font-inv-garamond",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  subsets: ["latin", "latin-ext", "cyrillic"],
+  display: "swap",
+  preload: false,
+});
+
+export const fontVariables = [fontSans, fontScript, fontClassic, fontSerif, fontModern, fontGaramond]
   .map((f) => f.variable)
   .join(" ");

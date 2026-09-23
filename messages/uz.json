@@ -173,7 +173,8 @@
     "kumush": "Kumush",
     "lola": "Lola",
     "tungi-osmon": "Tungi osmon",
-    "sahro": "Sahro"
+    "sahro": "Sahro",
+    "gulli-darvoza": "Gulli darvoza"
   },
   "auth": {
     "title": "Kabinetga kirish",
@@ -253,5 +254,49 @@
       "nov": "noyabr",
       "dec": "dekabr"
     }
+  },
+  "invitation": {
+    "open": "Taklifnomani ochish",
+    "skip": "Oʻtkazib yuborish",
+    "soundOn": "Ovozni yoqish",
+    "soundOff": "Ovozni oʻchirish",
+    "bismillah": "Bismillahir Rohmanir Rohim",
+    "dateTitle": "Toʻy sanasi",
+    "countdownTitle": "Toʻygacha qoldi",
+    "days": "kun",
+    "hours": "soat",
+    "minutes": "daqiqa",
+    "started": "Toʻy boshlandi!",
+    "venueTitle": "Toʻyxona",
+    "startsAt": "Boshlanishi {time} da",
+    "openMap": "Xaritada ochish",
+    "rsvpTitle": "Javobingizni kutamiz",
+    "rsvpText": "Iltimos, tashrif buyurishingizni bildiring.",
+    "name": "Ismingiz",
+    "attending": "Kelaman",
+    "declining": "Kela olmayman",
+    "choiceLabel": "Javobingiz",
+    "submit": "Javobni yuborish",
+    "sending": "Yuborilmoqda…",
+    "thanksYes": "Rahmat! Sizni intiqlik bilan kutamiz.",
+    "thanksNo": "Rahmat! Javobingiz qabul qilindi.",
+    "nameRequired": "Ismingizni kiriting.",
+    "choiceRequired": "Kelish yoki kelmasligingizni tanlang.",
+    "demoNotice": "Bu namuna. Javob saqlanmaydi.",
+    "closing": "Sizni kutib qolamiz",
+    "sincerely": "Hurmat bilan"
+  },
+  "demoInvitation": {
+    "first": "Akmal",
+    "second": "Madina",
+    "message": "Qalbimiz quvonchga toʻla shu kunda sizni ham yonimizda koʻrishni istaymiz. Farzandlarimizning nikoh toʻyiga marhamat qiling.",
+    "families": "Karimovlar va Rahimovlar oilalari",
+    "venueName": "Navroʻz saroyi",
+    "address": "Toshkent, Amir Temur shoh koʻchasi, 1"
+  },
+  "templatePage": {
+    "back": "Shablonlar",
+    "use": "Shu shablon bilan yaratish",
+    "video": "Video"
   }
 }

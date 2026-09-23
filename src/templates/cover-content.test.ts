@@ -24,6 +24,8 @@ describe("formatCoverDate", () => {
     expect(formatCoverDate(DEMO_EVENT_DATE, uz)).toEqual({
       weekday: "shanba",
       day: "17",
+      month: "oktabr",
+      year: "2026",
       monthYear: "oktabr 2026",
       time: "17:00",
     });

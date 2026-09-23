@@ -50,3 +50,6 @@ next-env.d.ts
 # supabase cli
 /supabase/.temp/
 /supabase/.branches/
+
+# source masters for template assets (optimized copies live in /public/templates)
+/birinchi/

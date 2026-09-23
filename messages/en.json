@@ -173,7 +173,8 @@
     "kumush": "Silver",
     "lola": "Tulip",
     "tungi-osmon": "Night Sky",
-    "sahro": "Desert"
+    "sahro": "Desert",
+    "gulli-darvoza": "Floral Gate"
   },
   "auth": {
     "title": "Log in",
@@ -253,5 +254,49 @@
       "nov": "November",
       "dec": "December"
     }
+  },
+  "invitation": {
+    "open": "Open the invitation",
+    "skip": "Skip",
+    "soundOn": "Turn sound on",
+    "soundOff": "Turn sound off",
+    "bismillah": "Bismillahir Rahmanir Rahim",
+    "dateTitle": "Wedding date",
+    "countdownTitle": "Time until the wedding",
+    "days": "days",
+    "hours": "hours",
+    "minutes": "minutes",
+    "started": "The celebration has begun!",
+    "venueTitle": "Venue",
+    "startsAt": "Starts at {time}",
+    "openMap": "Open in maps",
+    "rsvpTitle": "We look forward to your reply",
+    "rsvpText": "Please let us know if you can come.",
+    "name": "Your name",
+    "attending": "I will come",
+    "declining": "I can't come",
+    "choiceLabel": "Your reply",
+    "submit": "Send reply",
+    "sending": "Sending…",
+    "thanksYes": "Thank you! We look forward to seeing you.",
+    "thanksNo": "Thank you! Your reply has been received.",
+    "nameRequired": "Please enter your name.",
+    "choiceRequired": "Please choose whether you can come.",
+    "demoNotice": "This is a sample. Replies are not saved.",
+    "closing": "We look forward to seeing you",
+    "sincerely": "With respect"
+  },
+  "demoInvitation": {
+    "first": "Akmal",
+    "second": "Madina",
+    "message": "On this joyful day we would love to have you with us. We invite you to the wedding of our children.",
+    "families": "The Karimov and Rahimov families",
+    "venueName": "Navruz Palace",
+    "address": "Tashkent, 1 Amir Temur Avenue"
+  },
+  "templatePage": {
+    "back": "Templates",
+    "use": "Create with this template",
+    "video": "Video"
   }
 }
