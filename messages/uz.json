@@ -174,7 +174,8 @@
     "lola": "Lola",
     "tungi-osmon": "Tungi osmon",
     "sahro": "Sahro",
-    "gulli-darvoza": "Gulli darvoza"
+    "gulli-darvoza": "Gulli darvoza",
+    "samarqand-peshtoq": "Samarqand peshtoqi"
   },
   "auth": {
     "title": "Kabinetga kirish",
@@ -294,7 +295,9 @@
     "draftBanner": "Qoralama: bu sahifani hozircha faqat siz koʻrasiz.",
     "unavailableTitle": "Taklifnoma hozircha mavjud emas",
     "unavailableText": "Havolani tekshiring yoki taklif qilgan kishiga murojaat qiling.",
-    "madeWith": "{brand} bilan yaratilgan"
+    "madeWith": "{brand} bilan yaratilgan",
+    "submitShort": "Yuborish",
+    "scrollHint": "Pastga aylantiring"
   },
   "demoInvitation": {
     "first": "Akmal",
@@ -420,6 +423,10 @@
     "kumush": {
       "tagline": "Kumush va qatʼiy zamonaviy uslub",
       "description": "Kulrang va qora ranglar, aniq chiziqlar. Har qanday marosim uchun sodda tanlov."
+    },
+    "samarqand-peshtoq": {
+      "tagline": "Moviy koshinli peshtoq va ochiladigan eshik",
+      "description": "Samarqand madrasasining moviy koshinli peshtoqi, anor daraxtlari va oltin shafaq. Eshik ochilib, sham chiroqlari bilan bezatilgan hovlida kelin-kuyov paydo boʻladi. Ovozli video, islimiy naqshlar va feruza ranglar."
     }
   }
 }

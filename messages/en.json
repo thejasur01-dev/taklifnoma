@@ -174,7 +174,8 @@
     "lola": "Tulip",
     "tungi-osmon": "Night Sky",
     "sahro": "Desert",
-    "gulli-darvoza": "Floral Gate"
+    "gulli-darvoza": "Floral Gate",
+    "samarqand-peshtoq": "Samarkand Portal"
   },
   "auth": {
     "title": "Log in",
@@ -294,7 +295,9 @@
     "draftBanner": "Draft: only you can see this page for now.",
     "unavailableTitle": "This invitation is not available",
     "unavailableText": "Check the link or contact the person who invited you.",
-    "madeWith": "Made with {brand}"
+    "madeWith": "Made with {brand}",
+    "submitShort": "Send",
+    "scrollHint": "Scroll down"
   },
   "demoInvitation": {
     "first": "Akmal",
@@ -420,6 +423,10 @@
     "kumush": {
       "tagline": "Silver and a clean modern style",
       "description": "Grey and black tones with crisp lines. A simple choice for any celebration."
+    },
+    "samarqand-peshtoq": {
+      "tagline": "A blue-tiled portal and opening doors",
+      "description": "The blue-tiled portal of a Samarkand madrasa, pomegranate trees and a golden sunset. The doors open onto a candlelit courtyard with the bride and groom. A video intro with sound, islimi ornaments and turquoise accents."
     }
   }
 }

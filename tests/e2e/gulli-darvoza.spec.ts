@@ -52,6 +52,21 @@ test.describe("catalog and template pages", () => {
     await expect(page.getByText(inv.demoNotice)).toBeVisible();
   });
 
+  test("Samarqand peshtoqi is the second card and opens with its own style", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("#templates ul > li").nth(1)).toContainText(
+      uz.templateNames["samarqand-peshtoq"],
+    );
+
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/templates/samarqand-peshtoq/full");
+    await page.getByRole("button", { name: inv.open }).click();
+    await expect(page.getByText(inv.bismillah)).toBeVisible();
+    await expect(page.getByText(inv.scrollHint)).toBeVisible();
+    await expect(page.locator("main form").getByRole("button", { name: inv.submitShort })).toBeVisible();
+    await expect(page.getByText(inv.closing)).toBeVisible();
+  });
+
   test("themed templates open into the shared sections", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/templates/zumrad-tun/full");

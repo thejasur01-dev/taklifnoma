@@ -13,7 +13,15 @@ type Answer = "yes" | "no";
  * Guest reply form. Replies are stored only in "live" mode; demo and draft
  * previews show the same UI with a notice.
  */
-export function RsvpForm({ mode, slug }: { mode: InvitationMode; slug?: string }) {
+export function RsvpForm({
+  mode,
+  slug,
+  submitLabel = "long",
+}: {
+  mode: InvitationMode;
+  slug?: string;
+  submitLabel?: "long" | "short";
+}) {
   const t = useTranslations("invitation");
   const id = useId();
   const [name, setName] = useState("");
@@ -136,7 +144,7 @@ export function RsvpForm({ mode, slug }: { mode: InvitationMode; slug?: string }
         disabled={pending}
         className="h-13 w-full rounded-full bg-[var(--g-ink)] font-sans text-[15px] font-medium text-[var(--g-paper)] transition-transform active:scale-[0.98] disabled:opacity-60"
       >
-        {pending ? t("sending") : t("submit")}
+        {pending ? t("sending") : submitLabel === "short" ? t("submitShort") : t("submit")}
       </button>
       {notice ? <p className="text-center font-sans text-xs text-[var(--g-muted)]">{notice}</p> : null}
     </form>

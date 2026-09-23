@@ -1,45 +1,37 @@
 "use client";
 
-import { Volume2, VolumeX } from "lucide-react";
+import { ChevronDown, Volume2, VolumeX } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { type CSSProperties, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { InvitationSections, Names } from "../invitation/sections";
-import { Countdown } from "../sections/countdown";
 import type { InvitationProps } from "../invitation/types";
-
-const ASSETS = {
-  gate: "/templates/gulli-darvoza/gate.webp",
-  couple: "/templates/gulli-darvoza/couple.webp",
-  video: "/templates/gulli-darvoza/intro.mp4",
-};
-
-/** Warm ivory and champagne gold, sampled from the gate artwork. */
-const THEME = {
-  "--g-paper": "#fbf7f0",
-  "--g-card": "#fffdf9",
-  "--g-ink": "#3a2e26",
-  "--g-muted": "#86735f",
-  "--g-gold": "#a9824a",
-  "--g-line": "#e7d9c4",
-  "--g-font-body": "var(--font-inv-garamond)",
-  "--g-font-names": "var(--font-inv-script)",
-} as CSSProperties;
+import { Countdown } from "../sections/countdown";
+import type { VideoGateConfig } from "./configs";
 
 type Stage = "intro" | "playing" | "open";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-export function GulliDarvozaInvitation({ data, date, mode, slug, embedded, initiallyOpen }: InvitationProps) {
+export function VideoGateInvitation({
+  config,
+  data,
+  date,
+  mode,
+  slug,
+  embedded,
+  initiallyOpen,
+}: InvitationProps & { config: VideoGateConfig }) {
   const t = useTranslations("invitation");
   const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [stage, setStage] = useState<Stage>(initiallyOpen ? "open" : "intro");
   const [muted, setMuted] = useState(false);
+  const { assets, intro, hero } = config;
 
-  // Fetch the intro video once the page is idle, so the gate opens instantly on tap
+  // Fetch the video once the page is idle, so the gate opens instantly on tap
   // while the first paint stays light (poster image only).
   useEffect(() => {
     const video = videoRef.current;
@@ -103,13 +95,12 @@ export function GulliDarvozaInvitation({ data, date, mode, slug, embedded, initi
 
   return (
     <div
-      style={THEME}
+      style={config.theme}
       className="@container bg-[var(--g-paper)] [font-family:var(--g-font-body)] text-[var(--g-ink)]"
     >
-      {/* Gate → video → couple scene */}
-      <section className="relative h-[var(--inv-screen,100dvh)] min-h-[520px] overflow-hidden bg-[#1d1813]">
+      <section className="relative h-[var(--inv-screen,100dvh)] min-h-[520px] overflow-hidden bg-[#15110d]">
         <Image
-          src={ASSETS.couple}
+          src={assets.still}
           alt=""
           fill
           sizes={sizes}
@@ -119,7 +110,7 @@ export function GulliDarvozaInvitation({ data, date, mode, slug, embedded, initi
           )}
         />
         <Image
-          src={ASSETS.gate}
+          src={assets.poster}
           alt=""
           fill
           priority={!embedded}
@@ -131,8 +122,8 @@ export function GulliDarvozaInvitation({ data, date, mode, slug, embedded, initi
         />
         <video
           ref={videoRef}
-          src={ASSETS.video}
-          poster={ASSETS.gate}
+          src={assets.video}
+          poster={assets.poster}
           playsInline
           preload="none"
           aria-hidden="true"
@@ -144,22 +135,34 @@ export function GulliDarvozaInvitation({ data, date, mode, slug, embedded, initi
         />
 
         {stage === "intro" ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-black/60 via-black/5 to-transparent px-8 pb-[max(3.5rem,env(safe-area-inset-bottom))] text-white">
-            <Names
-              data={data}
-              className="text-[clamp(2.2rem,12.5cqw,3rem)] drop-shadow-[0_2px_12px_rgb(0_0_0/0.35)]"
-            />
-            <button
-              type="button"
-              onClick={openGate}
-              className="relative mt-8 inline-flex h-13 items-center rounded-full border border-white/45 bg-white/15 px-8 font-sans text-[15px] font-medium tracking-wide backdrop-blur-md transition-colors hover:bg-white/25 active:scale-[0.98]"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 animate-[ping_2.4s_cubic-bezier(0,0,0.2,1)_infinite] rounded-full border border-white/40 motion-reduce:hidden"
+          <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-black/55 via-black/5 to-transparent px-8 pb-[max(3.5rem,env(safe-area-inset-bottom))] text-white">
+            {intro.showNames ? (
+              <Names
+                data={data}
+                className="mb-8 text-[clamp(2.2rem,12.5cqw,3rem)] drop-shadow-[0_2px_12px_rgb(0_0_0/0.35)]"
               />
-              {t("open")}
-            </button>
+            ) : null}
+            {intro.button === "gold" ? (
+              <button
+                type="button"
+                onClick={openGate}
+                className="inline-flex h-14 animate-breathe items-center rounded-full border border-[#f6e3ad] bg-gradient-to-b from-[#f4dc98] via-[#dcb262] to-[#b98a36] px-9 font-sans text-[15px] font-semibold tracking-wide text-[#2b1d08] shadow-[0_10px_40px_-8px_rgb(233_186_90/0.75),inset_0_1px_0_rgb(255_255_255/0.6)] motion-reduce:animate-none"
+              >
+                {t("open")}
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={openGate}
+                className="relative inline-flex h-13 items-center rounded-full border border-white/45 bg-white/15 px-8 font-sans text-[15px] font-medium tracking-wide backdrop-blur-md transition-colors hover:bg-white/25 active:scale-[0.98]"
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 animate-[ping_2.4s_cubic-bezier(0,0,0.2,1)_infinite] rounded-full border border-white/40 motion-reduce:hidden"
+                />
+                {t("open")}
+              </button>
+            )}
           </div>
         ) : null}
 
@@ -188,7 +191,7 @@ export function GulliDarvozaInvitation({ data, date, mode, slug, embedded, initi
         ) : null}
 
         {stage === "open" ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-black/75 via-black/20 to-transparent px-6 pb-12 text-center text-white">
+          <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-black/75 via-black/20 to-transparent px-6 pb-10 text-center text-white">
             {data.showBismillah ? (
               <motion.p {...heroItem(0.1)} className="text-lg tracking-wide text-[#f1dfbf] italic">
                 {t("bismillah")}
@@ -196,24 +199,36 @@ export function GulliDarvozaInvitation({ data, date, mode, slug, embedded, initi
             ) : null}
             <motion.div
               {...heroItem(0.5)}
+              style={{ color: hero.namesColor }}
               className="mt-2 w-full [font-family:var(--g-font-names)] leading-[0.95] break-words drop-shadow-[0_2px_18px_rgb(0_0_0/0.45)]"
             >
               <p className="text-[clamp(3rem,19cqw,5rem)]">{data.hosts.first}</p>
-              <p className="my-1 text-[clamp(1.6rem,9cqw,2.4rem)] text-[#e9d3a8]">&amp;</p>
+              <p className="my-1 text-[clamp(1.6rem,9cqw,2.4rem)] text-[#f3dca6]">&amp;</p>
               <p className="text-[clamp(3rem,19cqw,5rem)]">{data.hosts.second}</p>
             </motion.div>
             <motion.p {...heroItem(0.95)} className="mt-5 font-sans text-sm tracking-[0.35em] uppercase">
               {date.day} · {date.month} · {date.year}
             </motion.p>
-            <motion.div {...heroItem(1.3)} className="mt-6 w-full max-w-[21rem]">
-              <Countdown startsAt={data.event.startsAt} variant="glass" />
-            </motion.div>
+            {hero.countdown ? (
+              <motion.div {...heroItem(1.3)} className="mt-6 w-full max-w-[21rem]">
+                <Countdown startsAt={data.event.startsAt} variant="glass" />
+              </motion.div>
+            ) : null}
+            {hero.scrollHint ? (
+              <motion.div
+                {...heroItem(1.5)}
+                className="mt-8 flex flex-col items-center gap-1 font-sans text-[11px] tracking-[0.25em] text-white/80 uppercase"
+              >
+                {t("scrollHint")}
+                <ChevronDown aria-hidden="true" className="size-5 animate-nudge motion-reduce:animate-none" />
+              </motion.div>
+            ) : null}
           </div>
         ) : null}
       </section>
 
       {stage === "open" ? (
-        <InvitationSections data={data} date={date} mode={mode} slug={slug} closingImage={ASSETS.gate} />
+        <InvitationSections data={data} date={date} mode={mode} slug={slug} {...config.sections} />
       ) : null}
     </div>
   );

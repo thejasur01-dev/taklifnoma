@@ -1,5 +1,6 @@
 import type { CeremonyType } from "@/lib/config";
 import type { LayoutId, ThemeId } from "./themes";
+import type { VideoGateSlug } from "./video-gate/configs";
 
 /**
  * The template catalog. Slugs match `templates.slug` in the database
@@ -9,7 +10,7 @@ import type { LayoutId, ThemeId } from "./themes";
  *  - themed: generic renderer = layout × theme (PROJECT_SPEC §6)
  */
 type MediaTemplate = {
-  slug: "gulli-darvoza";
+  slug: VideoGateSlug;
   kind: "media";
   thumbnail: string;
   hasVideo: true;
@@ -39,6 +40,13 @@ export const CATALOG: readonly CatalogTemplate[] = [
     slug: "gulli-darvoza",
     kind: "media",
     thumbnail: "/templates/gulli-darvoza/gate-thumb.webp",
+    hasVideo: true,
+    categories: ["wedding", "nikoh"],
+  },
+  {
+    slug: "samarqand-peshtoq",
+    kind: "media",
+    thumbnail: "/templates/samarqand-peshtoq/portal-thumb.webp",
     hasVideo: true,
     categories: ["wedding", "nikoh"],
   },

@@ -52,7 +52,8 @@ export function Countdown({
             "flex flex-col items-center",
             variant === "glass"
               ? "rounded-xl border border-white/25 bg-white/10 py-2.5 backdrop-blur-md"
-              : "rounded-2xl border border-[var(--g-line)] bg-[var(--g-card)] py-4",
+              : // --g-frame / --g-frame-width let a theme color the cells (e.g. turquoise tiles)
+                "rounded-2xl border [border-width:var(--g-frame-width,1px)] border-[var(--g-frame,var(--g-line))] bg-[var(--g-card)] py-4",
           )}
         >
           <dd

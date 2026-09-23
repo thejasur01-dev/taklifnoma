@@ -1,5 +1,6 @@
 import { getCatalogTemplate } from "../catalog";
-import { GulliDarvozaInvitation } from "../gulli-darvoza/invitation";
+import { VIDEO_GATE_CONFIGS } from "../video-gate/configs";
+import { VideoGateInvitation } from "../video-gate/invitation";
 import { ThemedInvitation } from "./themed";
 import type { InvitationProps } from "./types";
 
@@ -7,6 +8,8 @@ import type { InvitationProps } from "./types";
 export function InvitationRenderer({ templateSlug, ...props }: InvitationProps & { templateSlug: string }) {
   const template = getCatalogTemplate(templateSlug);
   if (!template) return null;
-  if (template.kind === "media") return <GulliDarvozaInvitation {...props} />;
+  if (template.kind === "media") {
+    return <VideoGateInvitation config={VIDEO_GATE_CONFIGS[template.slug]} {...props} />;
+  }
   return <ThemedInvitation themeId={template.slug} layout={template.layout} {...props} />;
 }

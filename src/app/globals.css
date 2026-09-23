@@ -45,6 +45,31 @@
   --radius-3xl: calc(var(--radius) * 2);
   --radius-4xl: calc(var(--radius) * 2.4);
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Slow "breathing" pulse for invitation call-to-action buttons. */
+  --animate-breathe: breathe 2.8s ease-in-out infinite;
+  --animate-nudge: nudge 1.8s ease-in-out infinite;
+
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.06);
+    }
+  }
+
+  @keyframes nudge {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(6px);
+      opacity: 1;
+    }
+  }
 }
 
 :root {
