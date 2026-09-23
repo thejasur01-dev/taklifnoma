@@ -23,16 +23,17 @@ export const invitationDataSchema = z.object({
 
 export type InvitationData = z.infer<typeof invitationDataSchema>;
 
-export type Countdown = { days: number; hours: number; minutes: number; started: boolean };
+export type Countdown = { days: number; hours: number; minutes: number; seconds: number; started: boolean };
 
-/** Time left until `target`, floored to whole minutes. */
+/** Time left until `target`, floored to whole seconds. */
 export function timeUntil(target: Date, now: Date = new Date()): Countdown {
-  const totalMinutes = Math.floor((target.getTime() - now.getTime()) / 60_000);
-  if (totalMinutes <= 0) return { days: 0, hours: 0, minutes: 0, started: true };
+  const total = Math.floor((target.getTime() - now.getTime()) / 1000);
+  if (total <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, started: true };
   return {
-    days: Math.floor(totalMinutes / 1440),
-    hours: Math.floor((totalMinutes % 1440) / 60),
-    minutes: totalMinutes % 60,
+    days: Math.floor(total / 86_400),
+    hours: Math.floor((total % 86_400) / 3600),
+    minutes: Math.floor((total % 3600) / 60),
+    seconds: total % 60,
     started: false,
   };
 }

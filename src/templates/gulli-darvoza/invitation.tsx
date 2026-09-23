@@ -7,6 +7,7 @@ import Image from "next/image";
 import { type CSSProperties, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { InvitationSections, Names } from "../invitation/sections";
+import { Countdown } from "../sections/countdown";
 import type { InvitationProps } from "../invitation/types";
 
 const ASSETS = {
@@ -187,21 +188,26 @@ export function GulliDarvozaInvitation({ data, date, mode, slug, embedded, initi
         ) : null}
 
         {stage === "open" ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-black/70 via-black/15 to-transparent px-8 pb-16 text-center text-white">
+          <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-black/75 via-black/20 to-transparent px-6 pb-12 text-center text-white">
             {data.showBismillah ? (
               <motion.p {...heroItem(0.1)} className="text-lg tracking-wide text-[#f1dfbf] italic">
                 {t("bismillah")}
               </motion.p>
             ) : null}
-            <motion.div {...heroItem(0.5)}>
-              <Names
-                data={data}
-                className="mt-4 text-[clamp(2.4rem,14cqw,3.4rem)] drop-shadow-[0_2px_16px_rgb(0_0_0/0.4)]"
-              />
+            <motion.div
+              {...heroItem(0.5)}
+              className="mt-2 w-full [font-family:var(--g-font-names)] leading-[0.95] break-words drop-shadow-[0_2px_18px_rgb(0_0_0/0.45)]"
+            >
+              <p className="text-[clamp(3rem,19cqw,5rem)]">{data.hosts.first}</p>
+              <p className="my-1 text-[clamp(1.6rem,9cqw,2.4rem)] text-[#e9d3a8]">&amp;</p>
+              <p className="text-[clamp(3rem,19cqw,5rem)]">{data.hosts.second}</p>
             </motion.div>
             <motion.p {...heroItem(0.95)} className="mt-5 font-sans text-sm tracking-[0.35em] uppercase">
               {date.day} · {date.month} · {date.year}
             </motion.p>
+            <motion.div {...heroItem(1.3)} className="mt-6 w-full max-w-[21rem]">
+              <Countdown startsAt={data.event.startsAt} variant="glass" />
+            </motion.div>
           </div>
         ) : null}
       </section>

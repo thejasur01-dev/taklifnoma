@@ -266,6 +266,7 @@
     "days": "дн.",
     "hours": "ч",
     "minutes": "мин",
+    "seconds": "сек",
     "started": "Свадьба началась!",
     "venueTitle": "Место проведения",
     "startsAt": "Начало в {time}",

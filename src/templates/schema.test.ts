@@ -34,7 +34,7 @@ describe("timeUntil", () => {
 
   it("splits the remaining time into days, hours and minutes", () => {
     const now = new Date("2026-10-15T15:30:30+05:00");
-    expect(timeUntil(target, now)).toEqual({ days: 2, hours: 2, minutes: 29, started: false });
+    expect(timeUntil(target, now)).toEqual({ days: 2, hours: 2, minutes: 29, seconds: 30, started: false });
   });
 
   it("reports started once the event time has passed", () => {
@@ -43,6 +43,7 @@ describe("timeUntil", () => {
       days: 0,
       hours: 0,
       minutes: 0,
+      seconds: 0,
       started: true,
     });
   });

@@ -5,11 +5,22 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { type Countdown as CountdownValue, timeUntil } from "../schema";
 
+type Variant = "boxes" | "glass";
+
 /**
- * Days / hours / minutes until the event. Rendered only after mount: the
- * server's clock and the guest's clock differ, so SSR output would not match.
+ * Live countdown (days, hours, minutes, seconds) to the event, ticking every
+ * second. Rendered after mount only: the server clock and the guest's clock
+ * differ, so server output would not match.
  */
-export function Countdown({ startsAt, className }: { startsAt: string; className?: string }) {
+export function Countdown({
+  startsAt,
+  variant = "boxes",
+  className,
+}: {
+  startsAt: string;
+  variant?: Variant;
+  className?: string;
+}) {
   const t = useTranslations("invitation");
   const [value, setValue] = useState<CountdownValue | null>(null);
 
@@ -17,7 +28,7 @@ export function Countdown({ startsAt, className }: { startsAt: string; className
     const target = new Date(startsAt);
     const tick = () => setValue(timeUntil(target));
     tick();
-    const id = window.setInterval(tick, 15_000);
+    const id = window.setInterval(tick, 1000);
     return () => window.clearInterval(id);
   }, [startsAt]);
 
@@ -29,19 +40,39 @@ export function Countdown({ startsAt, className }: { startsAt: string; className
     { label: t("days"), value: value?.days },
     { label: t("hours"), value: value?.hours },
     { label: t("minutes"), value: value?.minutes },
+    { label: t("seconds"), value: value?.seconds },
   ];
 
   return (
-    <dl className={cn("grid grid-cols-3 gap-3", className)} aria-live="off">
+    <dl className={cn("grid grid-cols-4", variant === "glass" ? "gap-2" : "gap-2.5", className)}>
       {cells.map((cell) => (
         <div
           key={cell.label}
-          className="flex flex-col items-center rounded-2xl border border-[var(--g-line)] bg-[var(--g-card)] py-5"
+          className={cn(
+            "flex flex-col items-center",
+            variant === "glass"
+              ? "rounded-xl border border-white/25 bg-white/10 py-2.5 backdrop-blur-md"
+              : "rounded-2xl border border-[var(--g-line)] bg-[var(--g-card)] py-4",
+          )}
         >
-          <dd className="text-4xl leading-none tabular-nums">
-            {cell.value === undefined ? "–" : String(cell.value).padStart(2, "0")}
+          <dd
+            className={cn(
+              "leading-none tabular-nums",
+              variant === "glass" ? "font-sans text-2xl font-light" : "text-4xl",
+            )}
+          >
+            {cell.value === undefined ? "--" : String(cell.value).padStart(2, "0")}
           </dd>
-          <dt className="mt-2 text-xs tracking-[0.2em] text-[var(--g-muted)] uppercase">{cell.label}</dt>
+          <dt
+            className={cn(
+              "mt-1.5 font-sans uppercase",
+              variant === "glass"
+                ? "text-[9px] tracking-[0.18em] text-white/75"
+                : "text-[10px] tracking-[0.2em] text-[var(--g-muted)]",
+            )}
+          >
+            {cell.label}
+          </dt>
         </div>
       ))}
     </dl>

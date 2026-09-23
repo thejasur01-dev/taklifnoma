@@ -266,6 +266,7 @@
     "days": "days",
     "hours": "hours",
     "minutes": "minutes",
+    "seconds": "seconds",
     "started": "The celebration has begun!",
     "venueTitle": "Venue",
     "startsAt": "Starts at {time}",
