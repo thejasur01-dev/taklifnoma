@@ -6,6 +6,7 @@ import { BrandMark } from "@/components/brand-mark";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { Link, redirect } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { safeNextPath } from "@/lib/auth/redirect";
 import { getCurrentUser } from "@/lib/auth/session";
 import { isDevCodeMode } from "@/lib/auth/telegram-gateway";
 import { buildCoverContent, calendarNames, DEMO_EVENT_DATE } from "@/templates/cover-content";
@@ -20,12 +21,14 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/login">)
   return { title: t("title"), robots: { index: false } };
 }
 
-export default async function LoginPage({ params }: PageProps<"/[locale]/login">) {
+export default async function LoginPage({ params, searchParams }: PageProps<"/[locale]/login">) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  if (await getCurrentUser()) redirect({ href: "/dashboard", locale });
+  const { next: rawNext } = await searchParams;
+  const next = safeNextPath(typeof rawNext === "string" ? rawNext : null);
+  if (await getCurrentUser()) redirect({ href: next ?? "/dashboard", locale });
 
   const [t, nav, demo, cal] = await Promise.all([
     getTranslations("auth"),
@@ -54,7 +57,7 @@ export default async function LoginPage({ params }: PageProps<"/[locale]/login">
           <h1 className="text-3xl font-semibold tracking-[-0.03em]">{t("title")}</h1>
           <p className="mt-3 text-pretty text-muted-foreground">{t("subtitle")}</p>
           <div className="mt-10">
-            <PhoneLoginForm devMode={isDevCodeMode()} />
+            <PhoneLoginForm devMode={isDevCodeMode()} next={next} />
           </div>
           <p className="mt-10 text-xs leading-relaxed text-muted-foreground">{t("terms")}</p>
         </main>

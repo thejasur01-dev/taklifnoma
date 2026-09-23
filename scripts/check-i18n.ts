@@ -24,6 +24,7 @@ const ALLOW_IDENTICAL = [
   /^ceremony\.(fotiha|osh|qiz_bazm)$/,
   /^home\.pricing\.individual\.name$/,
   /^templatePage\.video$/,
+  /^editor\.(telegram|whatsapp|instagram)$/,
   /^footer\.rights$/,
 ];
 

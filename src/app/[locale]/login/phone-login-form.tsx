@@ -30,6 +30,7 @@ function ErrorText({ id, children }: { id: string; children: string }) {
 }
 
 function CodeStep({
+  next,
   phone,
   sendState,
   resendAction,
@@ -37,6 +38,7 @@ function CodeStep({
   onChangePhone,
   devMode,
 }: {
+  next: string | null;
   phone: string;
   sendState: PhoneLoginState;
   resendAction: (formData: FormData) => void;
@@ -65,6 +67,7 @@ function CodeStep({
 
       <form ref={formRef} action={verifyAction} className="space-y-4" noValidate>
         <input type="hidden" name="phone" value={phone} />
+        {next ? <input type="hidden" name="next" value={next} /> : null}
         <div className="grid gap-2">
           <Label htmlFor="code">{t("codeLabel")}</Label>
           <Input
@@ -112,7 +115,7 @@ function CodeStep({
   );
 }
 
-export function PhoneLoginForm({ devMode }: { devMode: boolean }) {
+export function PhoneLoginForm({ devMode, next }: { devMode: boolean; next: string | null }) {
   const t = useTranslations("auth");
   const [sendState, sendAction, sending] = useActionState(requestPhoneCode, initialState);
   const [editing, setEditing] = useState(false);
@@ -121,6 +124,7 @@ export function PhoneLoginForm({ devMode }: { devMode: boolean }) {
     return (
       <CodeStep
         key={`${sendState.sentCount ?? 0}-${sendState.retryAfterSeconds ?? 0}`}
+        next={next}
         phone={sendState.phone}
         sendState={sendState}
         resendAction={sendAction}

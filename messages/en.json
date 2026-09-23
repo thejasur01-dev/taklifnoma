@@ -284,7 +284,16 @@
     "choiceRequired": "Please choose whether you can come.",
     "demoNotice": "This is a sample. Replies are not saved.",
     "closing": "We look forward to seeing you",
-    "sincerely": "With respect"
+    "sincerely": "With respect",
+    "greeting": "Assalamu alaikum",
+    "coverLine": "We warmly invite you to our wedding",
+    "previewNotice": "This invitation is not published yet. Replies are not saved.",
+    "rsvpClosed": "This invitation is not accepting replies right now.",
+    "rsvpFailed": "Could not send your reply. Please try again.",
+    "draftBanner": "Draft: only you can see this page for now.",
+    "unavailableTitle": "This invitation is not available",
+    "unavailableText": "Check the link or contact the person who invited you.",
+    "madeWith": "Made with {brand}"
   },
   "demoInvitation": {
     "first": "Akmal",
@@ -297,6 +306,119 @@
   "templatePage": {
     "back": "Templates",
     "use": "Create with this template",
-    "video": "Video"
+    "video": "Video",
+    "home": "Home",
+    "includesTitle": "What the invitation includes",
+    "i1": "Opening animation",
+    "i2": "Date, countdown and map",
+    "i3": "Guest replies and wishes",
+    "i4": "A personal link for every guest",
+    "i5": "Sharing via Telegram, WhatsApp and Instagram",
+    "order": "Order",
+    "fullscreen": "Full screen",
+    "previewHint": "Scroll inside the phone"
+  },
+  "catalog": {
+    "order": "Order",
+    "view": "View"
+  },
+  "create": {
+    "preparing": "Preparing your invitation…",
+    "failed": "Could not create the invitation. Please try again.",
+    "retry": "Try again"
+  },
+  "editor": {
+    "back": "Dashboard",
+    "title": "Edit invitation",
+    "tabEdit": "Edit",
+    "tabPreview": "Preview",
+    "namesTitle": "Names",
+    "first": "Groom's name",
+    "second": "Bride's name",
+    "bismillah": "Show the “Bismillahir Rahmanir Rahim” line",
+    "textTitle": "Invitation text",
+    "message": "Text",
+    "families": "Hosted by",
+    "familiesHint": "For example: the Karimov and Rahimov families",
+    "eventTitle": "Wedding details",
+    "date": "Date and time",
+    "venueName": "Venue name",
+    "address": "Address",
+    "mapUrl": "Map link (optional)",
+    "mapHint": "Paste a Yandex or Google Maps link. If empty, the venue is found by address.",
+    "linkTitle": "Link",
+    "slug": "Invitation address",
+    "slugHint": "Latin letters, digits and hyphens. 3 to 40 characters.",
+    "saving": "Saving…",
+    "saved": "Saved",
+    "saveFailed": "Could not save. Please check the details.",
+    "required": "Please fill in this field.",
+    "invalidUrl": "Invalid link.",
+    "slugInvalid": "Lowercase Latin letters, digits and hyphens only (3-40 characters).",
+    "slugTaken": "This address is taken. Choose another one.",
+    "slugReserved": "This address cannot be used.",
+    "publishTitle": "Publish",
+    "publishText": "Once published, the link opens for guests. You can keep editing afterwards.",
+    "price": "Price: {price, number} UZS",
+    "payNote": "Payment with Payme and Click is coming soon.",
+    "devActivate": "Activate in test mode",
+    "activateFailed": "Could not activate.",
+    "shareTitle": "Share the link",
+    "shareText": "Your invitation is ready. Send the link to your guests.",
+    "shareMessage": "We invite you to our wedding:",
+    "copy": "Copy",
+    "copied": "Copied",
+    "telegram": "Telegram",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "instagramHint": "Link copied. Paste it into an Instagram message or story.",
+    "openInvitation": "Open invitation",
+    "previewDraft": "Preview draft",
+    "slugFromNames": "From names"
+  },
+  "dashboardList": {
+    "newInvitation": "New invitation",
+    "edit": "Edit",
+    "open": "Open",
+    "date": "Wedding: {date}",
+    "chooseTemplate": "Choose a template"
+  },
+  "templateInfo": {
+    "gulli-darvoza": {
+      "tagline": "A golden gate, white roses and a video intro",
+      "description": "A golden gate covered in flowers opens onto the bride and groom. A video intro with sound, champagne gold colours and elegant lettering. The most festive choice for weddings and nikah."
+    },
+    "lojuvard": {
+      "tagline": "Samarkand lapis and a graceful arch",
+      "description": "Blue and white tones, an arch frame and handwritten-style names. A classic, calm invitation."
+    },
+    "anor": {
+      "tagline": "Pomegranate red and a romantic frame",
+      "description": "Deep red and pink shades with corner ornaments. A warm, heartfelt mood."
+    },
+    "zumrad-tun": {
+      "tagline": "Emerald backdrop and gold ornaments",
+      "description": "A deep green background, gold lines and an arch. A dignified style for nikah and fotiha."
+    },
+    "oq-atlas": {
+      "tagline": "White satin and minimal lines",
+      "description": "White and grey tones with calm typography. A modern, simple invitation."
+    },
+    "tungi-osmon": {
+      "tagline": "Night sky and silver lettering",
+      "description": "A deep navy background with bright names. For evening weddings and qiz bazm."
+    },
+    "sahro": {
+      "tagline": "Sand colours and warm tones",
+      "description": "Beige and brown shades with an arch frame. A good fit for osh and khatna."
+    },
+    "lola": {
+      "tagline": "Tulip pink and a soft mood",
+      "description": "Gentle pink colours and an elegant typeface. For fotiha and qiz bazm."
+    },
+    "kumush": {
+      "tagline": "Silver and a clean modern style",
+      "description": "Grey and black tones with crisp lines. A simple choice for any celebration."
+    }
   }
 }

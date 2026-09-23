@@ -56,7 +56,7 @@ export async function SiteHeader() {
             {account.label}
           </Link>
           <Button asChild size="sm" className="hidden sm:inline-flex">
-            <Link href={user ? "/dashboard" : "/login"}>{t("create")}</Link>
+            <Link href="/#templates">{t("create")}</Link>
           </Button>
           <MobileNav items={items} account={account} />
         </div>

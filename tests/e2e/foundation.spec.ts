@@ -46,8 +46,8 @@ test.describe("home page", () => {
     await page.goto("/");
     const catalog = page.locator("#templates");
     await catalog.getByRole("button", { name: uz.ceremony.xatna, exact: true }).click();
-    await expect(catalog.getByRole("button", { name: new RegExp(uz.templateNames.sahro) })).toBeVisible();
-    await expect(catalog.getByRole("button", { name: new RegExp(uz.templateNames.lojuvard) })).toHaveCount(0);
+    await expect(catalog.getByRole("heading", { name: uz.templateNames.sahro })).toBeVisible();
+    await expect(catalog.getByRole("heading", { name: uz.templateNames.lojuvard })).toHaveCount(0);
   });
 });
 

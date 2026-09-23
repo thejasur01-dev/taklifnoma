@@ -284,7 +284,16 @@
     "choiceRequired": "Kelish yoki kelmasligingizni tanlang.",
     "demoNotice": "Bu namuna. Javob saqlanmaydi.",
     "closing": "Sizni kutib qolamiz",
-    "sincerely": "Hurmat bilan"
+    "sincerely": "Hurmat bilan",
+    "greeting": "Assalomu alaykum",
+    "coverLine": "Sizni toʻyimizga chin qalbimizdan taklif etamiz",
+    "previewNotice": "Taklifnoma hali nashr qilinmagan. Javob saqlanmaydi.",
+    "rsvpClosed": "Bu taklifnoma hozircha javob qabul qilmaydi.",
+    "rsvpFailed": "Javobni yuborib boʻlmadi. Qaytadan urinib koʻring.",
+    "draftBanner": "Qoralama: bu sahifani hozircha faqat siz koʻrasiz.",
+    "unavailableTitle": "Taklifnoma hozircha mavjud emas",
+    "unavailableText": "Havolani tekshiring yoki taklif qilgan kishiga murojaat qiling.",
+    "madeWith": "{brand} bilan yaratilgan"
   },
   "demoInvitation": {
     "first": "Akmal",
@@ -297,6 +306,119 @@
   "templatePage": {
     "back": "Shablonlar",
     "use": "Shu shablon bilan yaratish",
-    "video": "Video"
+    "video": "Video",
+    "home": "Bosh sahifa",
+    "includesTitle": "Taklifnomaga nimalar kiradi",
+    "i1": "Ochilish animatsiyasi",
+    "i2": "Sana, taymer va xarita",
+    "i3": "Mehmonlar javobi va tilaklar",
+    "i4": "Har mehmonga shaxsiy havola",
+    "i5": "Telegram, WhatsApp va Instagram orqali ulashish",
+    "order": "Buyurtma berish",
+    "fullscreen": "Toʻliq ekran",
+    "previewHint": "Telefon ichida aylantirib koʻring"
+  },
+  "catalog": {
+    "order": "Buyurtma berish",
+    "view": "Koʻrish"
+  },
+  "create": {
+    "preparing": "Taklifnomangiz tayyorlanmoqda…",
+    "failed": "Taklifnomani yaratib boʻlmadi. Qaytadan urinib koʻring.",
+    "retry": "Qayta urinish"
+  },
+  "editor": {
+    "back": "Kabinet",
+    "title": "Taklifnomani tahrirlash",
+    "tabEdit": "Tahrirlash",
+    "tabPreview": "Koʻrinish",
+    "namesTitle": "Ismlar",
+    "first": "Kuyov ismi",
+    "second": "Kelin ismi",
+    "bismillah": "“Bismillahir Rohmanir Rohim” satrini koʻrsatish",
+    "textTitle": "Taklif matni",
+    "message": "Matn",
+    "families": "Taklif qiluvchilar",
+    "familiesHint": "Masalan: Karimovlar va Rahimovlar oilalari",
+    "eventTitle": "Toʻy maʼlumotlari",
+    "date": "Sana va vaqt",
+    "venueName": "Toʻyxona nomi",
+    "address": "Manzil",
+    "mapUrl": "Xarita havolasi (ixtiyoriy)",
+    "mapHint": "Yandex yoki Google xaritadan havolani qoʻying. Boʻsh qolsa, manzil boʻyicha topiladi.",
+    "linkTitle": "Havola",
+    "slug": "Taklifnoma manzili",
+    "slugHint": "Lotin harflari, raqamlar va chiziqcha. 3 dan 40 tagacha belgi.",
+    "saving": "Saqlanmoqda…",
+    "saved": "Saqlandi",
+    "saveFailed": "Saqlab boʻlmadi. Maʼlumotlarni tekshiring.",
+    "required": "Bu maydonni toʻldiring.",
+    "invalidUrl": "Havola notoʻgʻri.",
+    "slugInvalid": "Faqat kichik lotin harflari, raqamlar va chiziqcha (3-40 belgi).",
+    "slugTaken": "Bu manzil band. Boshqasini tanlang.",
+    "slugReserved": "Bu manzilni ishlatib boʻlmaydi.",
+    "publishTitle": "Nashr qilish",
+    "publishText": "Nashr qilingach, havola mehmonlar uchun ochiladi. Keyin ham istalgancha tahrirlashingiz mumkin.",
+    "price": "Narxi: {price, number} soʻm",
+    "payNote": "Payme va Click orqali toʻlov tez orada ulanadi.",
+    "devActivate": "Test rejimida faollashtirish",
+    "activateFailed": "Faollashtirib boʻlmadi.",
+    "shareTitle": "Havolani ulashing",
+    "shareText": "Taklifnomangiz tayyor. Havolani yaqinlaringizga yuboring.",
+    "shareMessage": "Sizni toʻyimizga taklif qilamiz:",
+    "copy": "Nusxa olish",
+    "copied": "Nusxa olindi",
+    "telegram": "Telegram",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "instagramHint": "Havola nusxalandi. Uni Instagram xabari yoki hikoyasiga qoʻying.",
+    "openInvitation": "Taklifnomani ochish",
+    "previewDraft": "Qoralamani koʻrish",
+    "slugFromNames": "Ismlardan olish"
+  },
+  "dashboardList": {
+    "newInvitation": "Yangi taklifnoma",
+    "edit": "Tahrirlash",
+    "open": "Ochish",
+    "date": "Toʻy: {date}",
+    "chooseTemplate": "Shablon tanlash"
+  },
+  "templateInfo": {
+    "gulli-darvoza": {
+      "tagline": "Oltin darvoza, oq atirgullar va video kirish",
+      "description": "Gullar bilan bezalgan oltin darvoza ochiladi va kelin-kuyov sahnasi paydo boʻladi. Ovozli kirish videosi, shampan-oltin ranglar va nafis yozuvlar. Toʻy va nikoh uchun eng tantanali tanlov."
+    },
+    "lojuvard": {
+      "tagline": "Samarqand lojuvardi va nafis arka",
+      "description": "Moviy va oq ranglar, arka shaklidagi ramka va qoʻlyozma uslubidagi ismlar. Klassik va osoyishta taklifnoma."
+    },
+    "anor": {
+      "tagline": "Anor rangi va romantik ramka",
+      "description": "Toʻq qizil va pushti ohanglar, burchaklardagi naqshlar. Iliq va samimiy kayfiyat."
+    },
+    "zumrad-tun": {
+      "tagline": "Zumrad fon va oltin bezaklar",
+      "description": "Toʻq yashil fon, oltin chiziqlar va arka. Nikoh va fotiha uchun salobatli uslub."
+    },
+    "oq-atlas": {
+      "tagline": "Oq atlas va minimal chiziqlar",
+      "description": "Oq va kulrang ohanglar, sokin tipografiya. Zamonaviy va sodda taklifnoma."
+    },
+    "tungi-osmon": {
+      "tagline": "Tungi osmon va kumush yozuvlar",
+      "description": "Toʻq moviy fon va yorqin ismlar. Kechki toʻy va qiz bazm uchun."
+    },
+    "sahro": {
+      "tagline": "Qum ranglari va issiq ohanglar",
+      "description": "Bej va jigarrang tuslar, arka ramka. Osh va xatna toʻyi uchun mos."
+    },
+    "lola": {
+      "tagline": "Lola pushtisi va yumshoq kayfiyat",
+      "description": "Nozik pushti ranglar va nafis shrift. Fotiha va qiz bazm uchun."
+    },
+    "kumush": {
+      "tagline": "Kumush va qatʼiy zamonaviy uslub",
+      "description": "Kulrang va qora ranglar, aniq chiziqlar. Har qanday marosim uchun sodda tanlov."
+    }
   }
 }

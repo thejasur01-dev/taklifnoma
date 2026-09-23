@@ -1,5 +1,3 @@
-import type { CeremonyType } from "@/lib/config";
-
 /**
  * Visual themes for invitations. A template = layout × theme (PROJECT_SPEC §6).
  * Adding a theme is data-only: every component reads colors and fonts from
@@ -22,13 +20,6 @@ export type Theme = {
 };
 
 export type LayoutId = "arch" | "frame" | "minimal";
-
-export type TemplateDefinition = {
-  slug: string;
-  layout: LayoutId;
-  theme: string;
-  categories: readonly CeremonyType[];
-};
 
 export const THEMES = [
   {
@@ -130,20 +121,6 @@ export const THEMES = [
 ] as const satisfies readonly Theme[];
 
 export type ThemeId = (typeof THEMES)[number]["id"];
-
-/** Showcase templates for the marketing site (DB `templates` becomes the source of truth later). */
-export const SHOWCASE_TEMPLATES = [
-  { slug: "lojuvard-arch", layout: "arch", theme: "lojuvard", categories: ["wedding", "nikoh"] },
-  { slug: "anor-frame", layout: "frame", theme: "anor", categories: ["wedding", "qiz_bazm"] },
-  { slug: "zumrad-tun-arch", layout: "arch", theme: "zumrad-tun", categories: ["nikoh", "fotiha"] },
-  { slug: "oq-atlas-minimal", layout: "minimal", theme: "oq-atlas", categories: ["wedding", "birthday"] },
-  { slug: "tungi-osmon-frame", layout: "frame", theme: "tungi-osmon", categories: ["wedding", "qiz_bazm"] },
-  { slug: "sahro-arch", layout: "arch", theme: "sahro", categories: ["osh", "xatna"] },
-  { slug: "lola-minimal", layout: "minimal", theme: "lola", categories: ["fotiha", "qiz_bazm", "birthday"] },
-  { slug: "kumush-frame", layout: "frame", theme: "kumush", categories: ["osh", "xatna", "other"] },
-] as const satisfies readonly TemplateDefinition[];
-
-export type ShowcaseTemplate = (typeof SHOWCASE_TEMPLATES)[number];
 
 const FONT_VARS: Record<ThemeFont, string> = {
   script: "var(--font-inv-script)",

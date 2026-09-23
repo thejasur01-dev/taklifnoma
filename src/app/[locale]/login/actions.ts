@@ -5,6 +5,7 @@ import { getLocale } from "next-intl/server";
 import { z } from "zod";
 import { redirect } from "@/i18n/navigation";
 import { normalizePhone } from "@/lib/auth/phone";
+import { safeNextPath } from "@/lib/auth/redirect";
 import { requestLoginCode, verifyLoginCode } from "@/lib/auth/phone-login";
 import { createClient } from "@/lib/supabase/server";
 
@@ -49,7 +50,8 @@ export async function verifyPhoneCode(prev: PhoneLoginState, formData: FormData)
   const result = await verifyLoginCode(phone, code.data, locale);
   if (!result.ok) return { ...prev, step: "code", phone, error: result.error };
 
-  return redirect({ href: "/dashboard", locale });
+  const next = safeNextPath(String(formData.get("next") ?? ""));
+  return redirect({ href: next ?? "/dashboard", locale });
 }
 
 export async function signOut(): Promise<never> {

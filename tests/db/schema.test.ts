@@ -31,9 +31,9 @@ beforeAll(async () => {
 }, 60_000);
 
 describe("schema & triggers", () => {
-  it("seeds 7 templates", async () => {
+  it("has the 9 catalog templates", async () => {
     const res = await db.query<{ n: number }>("select count(*)::int as n from public.templates");
-    expect(res.rows[0]!.n).toBe(7);
+    expect(res.rows[0]!.n).toBe(9);
   });
 
   it("creates a profile for every new auth user with metadata", async () => {
@@ -86,7 +86,7 @@ describe("schema & triggers", () => {
 describe("RLS: anonymous visitors", () => {
   it("can read active templates", async () => {
     const n = await asAnon(db, async (tx) => (await tx.query("select id from public.templates")).rows.length);
-    expect(n).toBe(7);
+    expect(n).toBe(9);
   });
 
   it("cannot read invitations, guests, rsvps or profiles", async () => {

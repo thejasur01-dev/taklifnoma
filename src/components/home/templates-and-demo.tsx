@@ -1,8 +1,8 @@
 "use client";
 
-import { ArrowRight, Eye, Play } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import Image from "next/image";
-import { useId, useMemo, useRef, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { Reveal } from "@/components/motion/reveal";
 import { PhoneFrame } from "@/components/phone-frame";
 import { Button } from "@/components/ui/button";
@@ -15,26 +15,15 @@ import { buildCoverContent, type CalendarNames, DEMO_EVENT_DATE } from "@/templa
 import { InvitationCover } from "@/templates/invitation-cover";
 import { getTheme, type LayoutId } from "@/templates/themes";
 
-type CoverItem = {
-  kind: "cover";
-  slug: string;
-  layout: LayoutId;
-  themeId: string;
-  name: string;
-  categories: CeremonyType[];
-};
-
-/** A full template with its own preview page (real artwork, optional video intro). */
-type MediaItem = {
-  kind: "media";
+export type ShowcaseItem = {
   slug: string;
   name: string;
+  tagline: string;
   categories: CeremonyType[];
-  thumbnail: string;
   hasVideo: boolean;
-};
+} & ({ kind: "media"; thumbnail: string } | { kind: "themed"; layout: LayoutId });
 
-export type ShowcaseItem = CoverItem | MediaItem;
+type ThemedItem = Extract<ShowcaseItem, { kind: "themed" }>;
 
 type Labels = {
   templatesTitle: string;
@@ -42,6 +31,8 @@ type Labels = {
   filterLabel: string;
   all: string;
   view: string;
+  order: string;
+  price: string;
   empty: string;
   demoTitle: string;
   demoSubtitle: string;
@@ -61,7 +52,6 @@ type Props = {
   cover: { greeting: string; invitation: string; venue: string; firstName: string; secondName: string };
   labels: Labels;
   calendar: CalendarNames;
-  ctaHref: string;
 };
 
 const TASHKENT_OFFSET = "+05:00";
@@ -72,27 +62,87 @@ function parseLocalDate(value: string): Date {
   return Number.isNaN(date.getTime()) ? DEMO_EVENT_DATE : date;
 }
 
-export function TemplatesAndDemo({
-  items,
-  ceremonies,
-  categoryLabels,
-  cover,
+function TemplateCard({
+  item,
   labels,
-  calendar,
-  ctaHref,
-}: Props) {
-  const formId = useId();
-  const demoRef = useRef<HTMLElement>(null);
+  categoryLabels,
+  sampleContent,
+}: {
+  item: ShowcaseItem;
+  labels: Labels;
+  categoryLabels: Record<CeremonyType, string>;
+  sampleContent: ReturnType<typeof buildCoverContent>;
+}) {
+  return (
+    <article className="group flex h-full flex-col rounded-2xl border bg-card p-2.5 shadow-[0_1px_2px_rgb(18_20_26/0.04)] transition-shadow duration-500 hover:shadow-[0_24px_50px_-30px_rgb(18_20_26/0.35)]">
+      <Link
+        href={`/templates/${item.slug}`}
+        tabIndex={-1}
+        aria-hidden="true"
+        className="relative block aspect-[4/5] overflow-hidden rounded-xl bg-muted"
+      >
+        {item.kind === "media" ? (
+          <Image
+            src={item.thumbnail}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div className="absolute inset-x-[14%] top-[6%] transition-transform duration-700 ease-out-soft group-hover:-translate-y-1">
+            <div className="overflow-hidden rounded-md shadow-[0_18px_40px_-20px_rgb(18_20_26/0.45)]">
+              <InvitationCover theme={getTheme(item.slug)} layout={item.layout} content={sampleContent} />
+            </div>
+          </div>
+        )}
+      </Link>
 
+      <div className="flex flex-1 flex-col px-2.5 pt-4 pb-1.5">
+        <div className="flex items-baseline justify-between gap-3">
+          <h3 className="text-lg font-semibold tracking-tight">{item.name}</h3>
+          <span className="shrink-0 text-sm text-muted-foreground tabular-nums">{labels.price}</span>
+        </div>
+        <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+          {item.hasVideo ? (
+            <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 font-medium text-accent-foreground">
+              <Play aria-hidden="true" className="size-3" strokeWidth={2} />
+              {labels.video}
+            </span>
+          ) : null}
+          {item.categories.map((c) => categoryLabels[c]).join(", ")}
+        </p>
+        <p className="mt-3 line-clamp-2 text-sm text-pretty text-muted-foreground">{item.tagline}</p>
+
+        <div className="mt-auto grid grid-cols-2 gap-2 border-t pt-4">
+          <Button asChild variant="outline" size="sm" className="h-10 px-2 text-[13px]">
+            <Link href={`/templates/${item.slug}`} aria-label={`${labels.view}: ${item.name}`}>
+              {labels.view}
+            </Link>
+          </Button>
+          <Button asChild size="sm" className="h-10 px-2 text-[13px]">
+            <Link href={`/create/${item.slug}`} aria-label={`${labels.order}: ${item.name}`}>
+              {labels.order}
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export function TemplatesAndDemo({ items, ceremonies, categoryLabels, cover, labels, calendar }: Props) {
+  const formId = useId();
+
+  const themedItems = items.filter((i): i is ThemedItem => i.kind === "themed");
   const [filter, setFilter] = useState<CeremonyType | "all">("all");
-  const coverItems = items.filter((i): i is CoverItem => i.kind === "cover");
-  const [selected, setSelected] = useState(coverItems[0]?.slug ?? "");
+  const [selected, setSelected] = useState(themedItems[0]?.slug ?? "");
   const [firstName, setFirstName] = useState(cover.firstName);
   const [secondName, setSecondName] = useState(cover.secondName);
   const [dateValue, setDateValue] = useState(DEMO_LOCAL_VALUE);
 
   const visible = filter === "all" ? items : items.filter((i) => i.categories.includes(filter));
-  const current = coverItems.find((i) => i.slug === selected) ?? coverItems[0];
+  const current = themedItems.find((i) => i.slug === selected) ?? themedItems[0];
 
   const sampleContent = useMemo(
     () =>
@@ -111,12 +161,6 @@ export function TemplatesAndDemo({
     parseLocalDate(dateValue),
     calendar,
   );
-
-  function openInDemo(slug: string) {
-    setSelected(slug);
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    demoRef.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-  }
 
   return (
     <>
@@ -158,82 +202,15 @@ export function TemplatesAndDemo({
             {labels.empty}
           </p>
         ) : (
-          <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-4">
+          <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {visible.map((item) => (
               <li key={item.slug}>
-                {item.kind === "media" ? (
-                  <Link
-                    href={`/templates/${item.slug}`}
-                    aria-label={`${item.name}. ${labels.view}`}
-                    className="group block rounded-lg"
-                  >
-                    <div
-                      aria-hidden="true"
-                      className="relative aspect-[9/16] overflow-hidden rounded-lg shadow-[0_1px_2px_rgb(18_20_26/0.06),0_18px_40px_-28px_rgb(18_20_26/0.35)] ring-1 ring-foreground/5 transition-transform duration-500 ease-out-soft group-hover:-translate-y-1"
-                    >
-                      <Image
-                        src={item.thumbnail}
-                        alt=""
-                        fill
-                        sizes="(max-width: 1024px) 50vw, 25vw"
-                        className="object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.03]"
-                      />
-                    </div>
-                    <div aria-hidden="true" className="mt-4 flex items-start justify-between gap-3">
-                      <div>
-                        <p className="flex items-center gap-2 font-medium">
-                          {item.name}
-                          {item.hasVideo ? (
-                            <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-[11px] font-medium text-accent-foreground">
-                              <Play className="size-3" strokeWidth={2} />
-                              {labels.video}
-                            </span>
-                          ) : null}
-                        </p>
-                        <p className="mt-0.5 text-sm text-muted-foreground">
-                          {item.categories.map((c) => categoryLabels[c]).join(", ")}
-                        </p>
-                      </div>
-                      <span className="mt-0.5 inline-flex items-center gap-1.5 text-sm text-primary opacity-80 transition-opacity group-hover:opacity-100">
-                        <Eye className="size-4" strokeWidth={1.5} />
-                        {labels.view}
-                      </span>
-                    </div>
-                  </Link>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => openInDemo(item.slug)}
-                    aria-label={`${item.name}. ${labels.view}`}
-                    className="group block w-full rounded-lg text-left"
-                  >
-                    <div
-                      aria-hidden="true"
-                      className="overflow-hidden rounded-lg shadow-[0_1px_2px_rgb(18_20_26/0.06),0_18px_40px_-28px_rgb(18_20_26/0.35)] ring-1 ring-foreground/5 transition-transform duration-500 ease-out-soft group-hover:-translate-y-1"
-                    >
-                      <InvitationCover
-                        theme={getTheme(item.themeId)}
-                        layout={item.layout}
-                        content={sampleContent}
-                      />
-                    </div>
-                    <div className="mt-4 flex items-start justify-between gap-3">
-                      <div>
-                        <p className="font-medium">{item.name}</p>
-                        <p className="mt-0.5 text-sm text-muted-foreground">
-                          {item.categories.map((c) => categoryLabels[c]).join(", ")}
-                        </p>
-                      </div>
-                      <span
-                        aria-hidden="true"
-                        className="mt-0.5 inline-flex items-center gap-1.5 text-sm text-primary opacity-80 transition-opacity group-hover:opacity-100"
-                      >
-                        <Eye aria-hidden="true" className="size-4" strokeWidth={1.5} />
-                        {labels.view}
-                      </span>
-                    </div>
-                  </button>
-                )}
+                <TemplateCard
+                  item={item}
+                  labels={labels}
+                  categoryLabels={categoryLabels}
+                  sampleContent={sampleContent}
+                />
               </li>
             ))}
           </ul>
@@ -242,7 +219,6 @@ export function TemplatesAndDemo({
 
       <section
         id="demo"
-        ref={demoRef}
         className="scroll-mt-16 bg-card/70 py-20 lg:py-28"
         aria-labelledby={`${formId}-title`}
       >
@@ -293,8 +269,8 @@ export function TemplatesAndDemo({
             <fieldset className="mt-7">
               <legend className="text-sm font-medium">{labels.style}</legend>
               <div className="mt-3 flex flex-wrap gap-2.5">
-                {coverItems.map((item) => {
-                  const theme = getTheme(item.themeId);
+                {themedItems.map((item) => {
+                  const theme = getTheme(item.slug);
                   const active = item.slug === current?.slug;
                   return (
                     <button
@@ -317,19 +293,21 @@ export function TemplatesAndDemo({
               </div>
             </fieldset>
 
-            <Button asChild size="lg" className="mt-10">
-              <Link href={ctaHref}>
-                {labels.cta}
-                <ArrowRight strokeWidth={1.75} />
-              </Link>
-            </Button>
+            {current ? (
+              <Button asChild size="lg" className="mt-10">
+                <Link href={`/create/${current.slug}`}>
+                  {labels.cta}
+                  <ArrowRight strokeWidth={1.75} />
+                </Link>
+              </Button>
+            ) : null}
           </Reveal>
 
           <Reveal delay={0.1} className="order-1 mx-auto w-[68%] max-w-[320px] lg:order-2">
             {current ? (
               <PhoneFrame label={labels.previewLabel}>
                 <InvitationCover
-                  theme={getTheme(current.themeId)}
+                  theme={getTheme(current.slug)}
                   layout={current.layout}
                   content={liveContent}
                 />

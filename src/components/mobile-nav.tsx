@@ -35,7 +35,7 @@ export function MobileNav({ items, account }: { items: Item[]; account: Item }) 
           ))}
         </nav>
         <Button asChild size="lg" className="mt-8 w-full">
-          <Link href="/login" onClick={() => setOpen(false)}>
+          <Link href="/#templates" onClick={() => setOpen(false)}>
             {t("create")}
           </Link>
         </Button>

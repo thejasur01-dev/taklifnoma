@@ -12,11 +12,9 @@ import { type ShowcaseItem, TemplatesAndDemo } from "@/components/home/templates
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { routing } from "@/i18n/routing";
-import { getCurrentUser } from "@/lib/auth/session";
-import { CEREMONY_TYPES, type CeremonyType } from "@/lib/config";
+import { CEREMONY_TYPES, type CeremonyType, PLAN_PRICES_UZS } from "@/lib/config";
+import { CATALOG } from "@/templates/catalog";
 import { calendarNames } from "@/templates/cover-content";
-import { MEDIA_TEMPLATES } from "@/templates/registry";
-import { SHOWCASE_TEMPLATES } from "@/templates/themes";
 
 /** Ceremonies shown as catalog filters (others are reachable later in /templates). */
 const FILTER_CEREMONIES = [
@@ -33,40 +31,35 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const [user, t, ceremony, names, demo, cal, templatePage] = await Promise.all([
-    getCurrentUser(),
+  const [t, ceremony, names, info, demo, cal, templatePage, catalog] = await Promise.all([
     getTranslations("home"),
     getTranslations("ceremony"),
     getTranslations("templateNames"),
+    getTranslations("templateInfo"),
     getTranslations("demo"),
     getTranslations("calendar"),
     getTranslations("templatePage"),
+    getTranslations("catalog"),
   ]);
-  // Until the constructor exists, "create" leads to login / the dashboard.
-  const ctaHref = user ? "/dashboard" : "/login";
+  // Creating always starts from choosing a template.
+  const ctaHref = "/#templates";
 
   const categoryLabels = Object.fromEntries(CEREMONY_TYPES.map((c) => [c, ceremony(c)])) as Record<
     CeremonyType,
     string
   >;
-  const items: ShowcaseItem[] = [
-    ...MEDIA_TEMPLATES.map((tpl) => ({
-      kind: "media" as const,
+  const items: ShowcaseItem[] = CATALOG.map((tpl) => {
+    const common = {
       slug: tpl.slug,
       name: names(tpl.slug),
+      tagline: info(`${tpl.slug}.tagline`),
       categories: [...tpl.categories],
-      thumbnail: tpl.thumbnail,
       hasVideo: tpl.hasVideo,
-    })),
-    ...SHOWCASE_TEMPLATES.map((tpl) => ({
-      kind: "cover" as const,
-      slug: tpl.slug,
-      layout: tpl.layout,
-      themeId: tpl.theme,
-      name: names(tpl.theme),
-      categories: [...tpl.categories],
-    })),
-  ];
+    };
+    return tpl.kind === "media"
+      ? { ...common, kind: "media" as const, thumbnail: tpl.thumbnail }
+      : { ...common, kind: "themed" as const, layout: tpl.layout };
+  });
 
   return (
     <>
@@ -90,7 +83,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             templatesSubtitle: t("templates.subtitle"),
             filterLabel: t("templates.filterLabel"),
             all: t("templates.all"),
-            view: t("templates.view"),
+            view: catalog("view"),
+            order: catalog("order"),
+            price: t("pricing.price", { price: PLAN_PRICES_UZS.standard }),
             empty: t("templates.empty"),
             demoTitle: t("demo.title"),
             demoSubtitle: t("demo.subtitle"),
@@ -103,7 +98,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             video: templatePage("video"),
           }}
           calendar={calendarNames(cal)}
-          ctaHref={ctaHref}
         />
         <Features />
         <Steps />
